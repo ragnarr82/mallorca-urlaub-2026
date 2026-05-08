@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mallorca Urlaub 2026 – Familienplaner</title>
+<style>
+  :root {
+    --sun: #f5a623; --sea: #0077b6; --green: #2d6a4f; --green-light: #d8f3dc;
+    --pink: #e07a5f; --pink-light: #fde8e4; --purple: #7c5cbf; --purple-light: #ede5f8;
+    --yellow-light: #fff9e6; --gray: #6b7280; --lizard: #4d7c0f; --lizard-light: #ecfccb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0f7fa 0%, #fff9e6 50%, #fde8e4 100%);
+    min-height: 100vh; color: #1a1a2e; }
+
+  /* HEADER */
+  header { background: linear-gradient(90deg, var(--sea) 0%, #023e8a 100%); color: white;
+    padding: 13px 20px; display: flex; align-items: center; gap: 11px;
+    box-shadow: 0 4px 16px rgba(0,119,182,0.3); }
+  header h1 { font-size: 1.3rem; font-weight: 700; }
+  header p  { font-size: 0.8rem; opacity: 0.85; margin-top: 2px; }
+  .header-emoji { font-size: 1.8rem; }
+  .header-actions { margin-left: auto; display: flex; gap: 7px; }
+  .btn { padding: 6px 12px; border-radius: 8px; border: none; font-size: 0.76rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .btn-suggest { background: var(--sun); color: #1a1a2e; }
+  .btn-suggest:hover { background: #e09518; }
+  .btn-clear { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+  .btn-clear:hover { background: rgba(255,255,255,0.25); }
+
+  /* WEATHER */
+  .weather-bar { background: white; border-bottom: 1px solid #e5e7eb; padding: 8px 20px; overflow-x: auto; white-space: nowrap; }
+  .weather-label { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.9px; color: var(--gray); margin-bottom: 5px; }
+  .weather-days { display: inline-flex; gap: 5px; }
+  .weather-day { display: inline-flex; flex-direction: column; align-items: center;
+    background: var(--yellow-light); border: 1px solid #fde68a; border-radius: 10px;
+    padding: 5px 9px; min-width: 66px; font-size: 0.72rem; }
+  .weather-day.rain-warn { background: #f0f9ff; border-color: #bae6fd; }
+  .wd-date { font-weight: 600; color: var(--sea); }
+  .wd-icon { font-size: 1.2rem; margin: 2px 0; }
+  .wd-temp { font-weight: 700; color: #d97706; }
+  .wd-rain { color: #3b82f6; font-size: 0.64rem; }
+  .wd-desc { color: var(--gray); font-size: 0.62rem; text-align: center; }
+
+  /* LAYOUT */
+  .main { display: grid; grid-template-columns: 330px 1fr; height: calc(100vh - 143px); min-height: 500px; }
+
+  /* LEFT */
+  .left-panel { background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; overflow: hidden; }
+  .left-top { padding: 11px 13px 8px; flex-shrink: 0; border-bottom: 1px solid #f3f4f6; }
+  .left-top h2 { font-size: 0.88rem; font-weight: 700; color: var(--sea); margin-bottom: 7px; }
+  .hint { font-size: 0.64rem; color: #9ca3af; font-weight: 400; }
+  .search-box { width: 100%; padding: 6px 10px; border: 1.5px solid #d1d5db; border-radius: 8px; font-size: 0.78rem; outline: none; transition: border-color 0.2s; }
+  .search-box:focus { border-color: var(--sea); }
+  .pool-counter { font-size: 0.66rem; color: var(--gray); margin-top: 5px; }
+  .pool-counter span { font-weight: 600; color: var(--sea); }
+  #activityPool { flex: 1; overflow-y: auto; padding: 9px 13px; }
+
+  /* CATEGORIES */
+  .category-section { margin-bottom: 11px; }
+  .category-header { display: flex; align-items: center; gap: 5px; font-size: 0.67rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.7px; color: white; padding: 4px 8px;
+    border-radius: 6px; margin-bottom: 5px; cursor: pointer; user-select: none; }
+  .category-header.beach  { background: var(--sea); }
+  .category-header.natur  { background: var(--green); }
+  .category-header.kultur { background: var(--purple); }
+  .category-header.spass  { background: var(--pink); }
+  .category-header.food   { background: #b45309; }
+  .category-header.eidechse { background: var(--lizard); }
+  .cat-count { margin-left: auto; background: rgba(255,255,255,0.25); border-radius: 10px; padding: 1px 5px; font-size: 0.63rem; }
+  .category-toggle { font-size: 0.68rem; }
+
+  /* CARDS */
+  .activity-card { display: flex; align-items: flex-start; gap: 7px; background: #f9fafb;
+    border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 7px 9px; margin-bottom: 5px;
+    cursor: grab; transition: all 0.15s; user-select: none; }
+  .activity-card:hover { border-color: var(--sea); box-shadow: 0 4px 14px rgba(0,0,0,0.15); transform: translateY(-1px); }
+  .activity-card.eidechse-card { border-color: #bbf7d0; background: #f0fdf4; }
+  .activity-card.eidechse-card:hover { border-color: var(--lizard); }
+  .activity-card.dragging { opacity: 0.3; cursor: grabbing; }
+  .card-emoji { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .card-info { flex: 1; min-width: 0; }
+  .card-name { font-size: 0.77rem; font-weight: 600; line-height: 1.2; }
+  .card-meta { display: flex; gap: 3px; margin-top: 2px; flex-wrap: wrap; }
+  .card-desc-short { font-size: 0.65rem; color: var(--gray); margin-top: 2px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-dist { font-size: 0.62rem; color: #9ca3af; margin-top: 1px; }
+
+  /* TAGS */
+  .tag { font-size: 0.59rem; padding: 1px 5px; border-radius: 10px; font-weight: 500; white-space: nowrap; }
+  .tag.beach    { background: #dbeafe; color: #1d4ed8; }
+  .tag.natur    { background: var(--green-light); color: var(--green); }
+  .tag.kultur   { background: var(--purple-light); color: var(--purple); }
+  .tag.spass    { background: var(--pink-light); color: #be4b34; }
+  .tag.food     { background: #fef3c7; color: #92400e; }
+  .tag.hike     { background: #d1fae5; color: #065f46; }
+  .tag.drive    { background: #e0e7ff; color: #3730a3; }
+  .tag.half     { background: #f3f4f6; color: #374151; }
+  .tag.full     { background: #f3f4f6; color: #374151; }
+  .tag.kids3    { background: #fce7f3; color: #9d174d; }
+  .tag.top      { background: #fef08a; color: #713f12; }
+  .tag.eidechse { background: var(--lizard-light); color: var(--lizard); }
+
+  /* RIGHT */
+  .right-panel { overflow-y: auto; padding: 12px 15px; background: #f8fafc; }
+  .right-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .right-header h2 { font-size: 0.88rem; font-weight: 700; }
+  .legend { display: flex; gap: 7px; font-size: 0.63rem; color: var(--gray); flex-wrap: wrap; }
+  .days-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .day-column { background: white; border: 2px solid #e5e7eb; border-radius: 12px; overflow: hidden; min-height: 140px; transition: border-color 0.2s, background 0.2s; }
+  .day-column.drag-over { border-color: var(--sea); background: #f0f9ff; }
+  .day-header { padding: 6px 10px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
+  .day-header-left { display: flex; flex-direction: column; gap: 1px; }
+  .day-header-day { font-size: 0.8rem; }
+  .day-header-tip { font-size: 0.58rem; font-weight: 500; opacity: 0.8; }
+  .day-header.mo { background: #dbeafe; color: #1e40af; }
+  .day-header.di { background: #ede9fe; color: #4c1d95; }
+  .day-header.mi { background: #d1fae5; color: #065f46; }
+  .day-header.do { background: #fef3c7; color: #78350f; }
+  .day-header.fr { background: #fce7f3; color: #831843; }
+  .day-header.sa { background: #fee2e2; color: #7f1d1d; }
+  .day-header.so { background: #fff7ed; color: #7c2d12; }
+  .day-weather-mini { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; font-size: 0.67rem; flex-shrink: 0; }
+  .rain-pct { font-size: 0.58rem; opacity: 0.8; }
+  .day-drop-zone { padding: 6px; min-height: 85px; }
+  .day-drop-zone.empty::after { content: '+ Aktivität ablegen'; display: block; text-align: center;
+    padding: 16px 8px; color: #d1d5db; font-size: 0.68rem; border: 2px dashed #e5e7eb; border-radius: 8px; }
+  .placed-card { display: flex; align-items: center; gap: 5px; background: #f0f9ff; border: 1.5px solid #bae6fd;
+    border-radius: 8px; padding: 4px 7px; margin-bottom: 3px; font-size: 0.69rem; font-weight: 500;
+    cursor: pointer; position: relative; transition: box-shadow 0.15s; }
+  .placed-card.eidechse-placed { background: #f0fdf4; border-color: #bbf7d0; }
+  .placed-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .placed-card:hover .remove-btn { opacity: 1; }
+  .remove-btn { position: absolute; right: 3px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: #ef4444; font-size: 0.8rem;
+    opacity: 0; transition: opacity 0.15s; padding: 1px 3px; line-height: 1; }
+  .p-emoji { font-size: 0.88rem; }
+  .p-name  { flex: 1; line-height: 1.2; padding-right: 13px; }
+  .p-time  { font-size: 0.58rem; color: #0369a1; flex-shrink: 0; }
+
+  /* ── IMAGE CAROUSEL ── */
+  .carousel { position: relative; width: 100%; height: 240px; background: #e5e7eb; border-radius: 16px 16px 0 0; overflow: hidden; flex-shrink: 0; }
+  .carousel-track { display: flex; height: 100%; transition: transform 0.35s ease; will-change: transform; }
+  .carousel-slide { flex: 0 0 100%; height: 100%; }
+  .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .carousel-slide .slide-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+  .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.45); color: white;
+    border: none; cursor: pointer; width: 34px; height: 34px; border-radius: 50%; font-size: 1rem; display: flex;
+    align-items: center; justify-content: center; transition: background 0.15s; z-index: 5; }
+  .carousel-btn:hover { background: rgba(0,0,0,0.65); }
+  .carousel-prev { left: 10px; }
+  .carousel-next { right: 10px; }
+  .carousel-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 5; }
+  .carousel-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s; border: none; }
+  .carousel-dot.active { background: white; }
+  .carousel-counter { position: absolute; top: 8px; right: 10px; background: rgba(0,0,0,0.4); color: white;
+    font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; z-index: 5; }
+
+  /* MODAL */
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200;
+    justify-content: center; align-items: center; padding: 16px; }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: white; border-radius: 16px; width: 100%; max-width: 580px; max-height: 92vh;
+    overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.2s ease; display: flex; flex-direction: column; }
+  @keyframes slideUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  .modal-body { padding: 18px 20px 22px; }
+  .modal-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+  .modal-title { font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+  .modal-close { background: #f3f4f6; border: none; cursor: pointer; border-radius: 8px;
+    padding: 6px 10px; font-size: 1rem; color: #374151; flex-shrink: 0; margin-left: 10px; transition: background 0.15s; }
+  .modal-close:hover { background: #e5e7eb; }
+  .modal-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 12px; }
+  .modal-tag { font-size: 0.7rem; padding: 2px 7px; border-radius: 12px; font-weight: 500; }
+  .modal-desc { font-size: 0.85rem; color: #374151; line-height: 1.6; margin-bottom: 13px; }
+  .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 14px; }
+  .modal-info-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 9px 11px; }
+  .modal-info-label { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.7px; color: var(--gray); margin-bottom: 2px; }
+  .modal-info-value { font-size: 0.82rem; font-weight: 600; color: #1a1a2e; }
+  .modal-lizard-box { background: var(--lizard-light); border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 13px; margin-bottom: 13px; font-size: 0.8rem; color: #365314; line-height: 1.5; }
+  .modal-lizard-box strong { color: var(--lizard); }
+  .modal-tips { margin-bottom: 14px; }
+  .modal-tips h4 { font-size: 0.78rem; font-weight: 700; color: #374151; margin-bottom: 5px; }
+  .modal-tips ul { list-style: none; }
+  .modal-tips li { font-size: 0.78rem; color: #4b5563; padding: 2px 0 2px 17px; position: relative; line-height: 1.4; }
+  .modal-tips li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .modal-actions { display: flex; gap: 7px; flex-wrap: wrap; }
+  .modal-btn { display: inline-flex; align-items: center; gap: 5px; padding: 8px 13px; border-radius: 10px;
+    font-size: 0.78rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.15s; }
+  .modal-btn-komoot    { background: #6aa84f; color: white; } .modal-btn-komoot:hover { background: #5a9040; }
+  .modal-btn-maps      { background: #4285f4; color: white; } .modal-btn-maps:hover { background: #3367d6; }
+  .modal-btn-booking   { background: #dc2626; color: white; } .modal-btn-booking:hover { background: #b91c1c; }
+  .modal-btn-add       { background: var(--sun); color: #1a1a2e; } .modal-btn-add:hover { background: #e09518; }
+  .modal-btn-secondary { background: #f3f4f6; color: #374151; } .modal-btn-secondary:hover { background: #e5e7eb; }
+  .modal-day-selector { margin-top: 8px; }
+  .modal-day-selector label { font-size: 0.73rem; color: var(--gray); display: block; margin-bottom: 4px; }
+  .modal-day-selector select { padding: 6px 10px; border: 1.5px solid #d1d5db; border-radius: 8px; font-size: 0.78rem; outline: none; width: 100%; cursor: pointer; }
+  .modal-day-selector select:focus { border-color: var(--sea); }
+  .modal-day-btns { display: flex; gap: 7px; margin-top: 7px; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 18px; right: 18px; background: #1e40af; color: white; padding: 9px 14px;
+    border-radius: 10px; font-size: 0.78rem; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    opacity: 0; transform: translateY(8px); transition: all 0.25s; pointer-events: none; z-index: 300; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-emoji">🏖️</div>
+  <div>
+    <h1>Mallorca Familienurlaub 2026</h1>
+    <p>18.–27. Mai · Hotel Blau Punta Reina · Frau + 2 Kinder (3 & 6 J.) · Opel Mokka</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-suggest" onclick="loadSuggestedPlan()">✨ Vorschlag laden</button>
+    <button class="btn btn-clear" onclick="clearAll()">🗑 Leeren</button>
+  </div>
+</header>
+
+<div class="weather-bar">
+  <div class="weather-label">🌤 Wetterprognose — historische Mittelwerte Mai, Ostmallorca · Meerwasser ~21°C</div>
+  <div class="weather-days" id="weatherDays"></div>
+</div>
+
+<div class="main">
+  <div class="left-panel">
+    <div class="left-top">
+      <h2>🎯 Aktivitäten <span class="hint">– klicken für Details · ziehen zum Einplanen</span></h2>
+      <input class="search-box" type="text" id="searchBox" placeholder="🔍 Suchen… (z.B. Eidechse, Wanderung)" oninput="filterCards(this.value)">
+      <div class="pool-counter" id="poolCounter"></div>
+    </div>
+    <div id="activityPool"></div>
+  </div>
+  <div class="right-panel">
+    <div class="right-header">
+      <h2>📅 Urlaubsplan</h2>
+      <div class="legend">
+        <span>🥾 Wanderung</span><span>🦎 Eidechsen-Spot</span><span>🚗 Ausflug</span><span>👶 ab 3 J.</span>
+      </div>
+    </div>
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="handleBackdropClick(event)">
+  <div class="modal" id="modal">
+    <div id="carouselContainer"></div>
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle"></div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-tags"    id="modalTags"></div>
+      <div id="modalLizardBox"></div>
+      <div class="modal-desc"    id="modalDesc"></div>
+      <div class="modal-grid"    id="modalGrid"></div>
+      <div class="modal-tips"    id="modalTips"></div>
+      <div class="modal-actions" id="modalActions"></div>
+      <div class="modal-day-selector" id="modalDaySelector">
+        <label>Zu einem Tag hinzufügen:</label>
+        <select id="daySelect"></select>
+        <div class="modal-day-btns">
+          <button class="modal-btn modal-btn-add"       style="flex:1" onclick="addFromModal()">+ Zum Plan hinzufügen</button>
+          <button class="modal-btn modal-btn-secondary"              onclick="closeModal()">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── WEATHER ──────────────────────────────────────────────────────────────────
+const weatherData = [
+  { date:'18.05', day:'Mo', icon:'☀️', high:24, low:16, rain:5,  desc:'Sonnig',        tip:'Ankunftstag'   },
+  { date:'19.05', day:'Di', icon:'⛅', high:23, low:15, rain:10, desc:'Leicht bew.',    tip:''              },
+  { date:'20.05', day:'Mi', icon:'☀️', high:25, low:17, rain:5,  desc:'Sonnig',        tip:'Sineu-Markt!'  },
+  { date:'21.05', day:'Do', icon:'🌤', high:24, low:16, rain:8,  desc:'Meist sonn.',   tip:''              },
+  { date:'22.05', day:'Fr', icon:'⛅', high:22, low:15, rain:18, desc:'Wechselhaft',   tip:'Stadtbesuch'   },
+  { date:'23.05', day:'Sa', icon:'🌦', high:21, low:14, rain:28, desc:'Schauer mögl.', tip:'→ Höhlen!'     },
+  { date:'24.05', day:'So', icon:'☀️', high:25, low:16, rain:6,  desc:'Sonnig',        tip:''              },
+  { date:'25.05', day:'Mo', icon:'☀️', high:26, low:17, rain:5,  desc:'Sehr sonnig',   tip:'Schönster Tag' },
+  { date:'26.05', day:'Di', icon:'🌤', high:25, low:17, rain:8,  desc:'Meist sonn.',   tip:''              },
+  { date:'27.05', day:'Mi', icon:'☀️', high:24, low:16, rain:5,  desc:'Sonnig',        tip:'Abreisetag'    },
+];
+const dayColors = { Mo:'mo',Di:'di',Mi:'mi',Do:'do',Fr:'fr',Sa:'sa',So:'so' };
+
+// ── ACTIVITIES ───────────────────────────────────────────────────────────────
+const activities = [
+  // ── EIDECHSEN-WANDERUNGEN ─────────────────────────────────────────────────
+  {
+    id:'l1', cat:'eidechse', emoji:'🦎', name:'Barranc de Biniaraix – Eidechsenparadies',
+    tags:['natur','hike','eidechse','top'],
+    shortDesc:'★ Beste Eidechsenwanderung! Tausende Podarcis lilfordi auf uralten Steinmauern.',
+    dist:'55 Min.',
+    lizardInfo:'Absolute Eidechsen-Hochburg! Die jahrtausendealten Trockensteinmauern sind dicht besiedelt mit Podarcis lilfordi – der endemischen Mauereidechse Mallorcas. Kinder können sie aus nächster Nähe beobachten, die Tiere sind sehr zutraulich.',
+    detail: {
+      desc:'Der Barranc de Biniaraix ist nicht nur die schönste Wanderung Mallorcas – er ist auch das beste Eidechsen-Biotop der Insel. Tausende der endemischen Podarcis lilfordi (Mallorca-Mauereidechse) sonnen sich auf den Trockensteinmauern. Die Kinder können sie aus wenigen Zentimetern Entfernung beobachten! Nach der Wanderung (2h, flach) Mittagessen in Sóller.',
+      duration:'2–2,5 Stunden', difficulty:'Leicht ★☆☆', distance:'4 km', start:'Dorf Biniaraix',
+      tips:['Eidechsen sind morgens aktiver (Sonnenbaden!)', 'Kinder nicht rennen – Tiere bleiben dann sitzen','Kleines Stück Brot hinhalten: manche fressen aus der Hand','Fernglas für Detailfotos empfohlen','Danach Vintage-Tram in Sóller zum Hafen kombinierbar'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/3/3c/Barranc_de_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/6/67/Engstelle_im_Barranc_de_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5d/Pflasterweg_in_der_Schlucht_von_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/d/de/Torrent_de_Biniaraix.jpg'],
+      komoot:'https://www.komoot.com/discover/soller/@39.7696,2.7159?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Barranc+de+Biniaraix+Mallorca'
+    }
+  },
+  {
+    id:'l2', cat:'eidechse', emoji:'🦎', name:'Camí de Ronda – Küstenpfad',
+    tags:['natur','hike','eidechse','kids3','half'],
+    shortDesc:'Felsiger Küstenpfad ab Hotel: massenhaft Eidechsen auf Steinen & Felswänden.',
+    dist:'10 Min.',
+    lizardInfo:'Küstennahe Felsen und alte Steinmauern sind der ideale Lebensraum für Podarcis lilfordi. Auf dem Camí de Ronda kann man pro 100m Weg locker 20–30 Eidechsen sehen – perfekt für Kinder!',
+    detail: {
+      desc:'Der Camí de Ronda ist ein uralter Küstenwächterweg, der die Buchten von Portocolom verbindet. Die felsigen Abschnitte wimmeln von Eidechsen – Podarcis lilfordi sonnt sich auf jedem Stein. Dazwischen kleine versteckte Badebuchten zum Abkühlen. Ideal für Kinder: kurz, abwechslungsreich, immer neue Eidechsen!',
+      duration:'1,5–2,5 Stunden (flexibel)', difficulty:'Leicht ★☆☆', distance:'3–6 km', start:'Ab Hotel',
+      tips:['Direkt ab Hotel – kein Auto nötig!','Kinder brauchen Schlüpfschuhe für die Felsen','Kombination mit Badebucht unterwegs einplanen','Morgens und abends die meisten Eidechsen aktiv','Kleine Tintenfische und Krebse in den Felspools entdecken'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/66/Podacis_lilfordi_lilfordi.jpg','https://upload.wikimedia.org/wikipedia/commons/4/44/12_Portocolom_al_capvespre.JPG'],
+      komoot:'https://www.komoot.com/discover/portocolom/@39.4167,3.2667?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Portocolom+coastal+path+Mallorca'
+    }
+  },
+  {
+    id:'l3', cat:'eidechse', emoji:'🦎', name:'Parc Natural Llevant – Eidechsenpfad',
+    tags:['natur','hike','eidechse','kids3','half'],
+    shortDesc:'Naturpark direkt am Hotel: Eidechsen, Falken, Kaninchen – Tier-Safari für Kinder.',
+    dist:'15 Min.',
+    lizardInfo:'Im Naturpark Llevant leben besonders viele Eidechsen auf den trockenen Felsplatten und alten Mauern. Auch Falken, Hasen und Wildkaninchen sind häufig – eine richtige Mini-Safari!',
+    detail: {
+      desc:'Der Naturpark ist ein Geheimtipp für Tierbeobachtungen. Neben den allgegenwärtigen Eidechsen fliegen Falken über dem Pinienwald, Kaninchen huschen durchs Gestrüpp. Breite Wege, keine schwierigen Abschnitte – der 3-Jährige kommt problemlos mit. Perfekter Nachmittagsausflug oder Ergänzung zum Strandtag.',
+      duration:'1,5–3 Stunden (flexibel)', difficulty:'Leicht ★☆☆', distance:'4–8 km', start:'Nahe Hotel',
+      tips:['Früh morgens: meiste Tiere aktiv', 'Fernglas mitbringen für Falken', 'Kinder ruhig halten = mehr Eidechsen sehen','Kombination mit Cala Mondragó danach ideal','Keine Verpflegung vor Ort – Picknick einpacken'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/66/Podacis_lilfordi_lilfordi.jpg','https://upload.wikimedia.org/wikipedia/commons/7/79/Mondrag%C3%B3_in_4.JPG','https://upload.wikimedia.org/wikipedia/commons/5/56/Cala_Mondrag%C3%B3_01.jpg'],
+      komoot:'https://www.komoot.com/discover/llevant/@39.656,3.400?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Parc+Natural+de+Llevant+Mallorca'
+    }
+  },
+  {
+    id:'l4', cat:'eidechse', emoji:'🦎', name:'Artà Region – Felsenwanderung',
+    tags:['natur','hike','eidechse','half'],
+    shortDesc:'Felsige Hügellandschaft mit besonders großen Eidechsen auf Kalksteinfelsen.',
+    dist:'30 Min.',
+    lizardInfo:'Die Kalksteinfelsen rund um Artà beherbergen besonders gut sichtbare, große Exemplare der Podarcis lilfordi. Auf sonnigen Felsplatten sitzen sie oft regungslos und lassen Kinder sehr nah heran.',
+    detail: {
+      desc:'Die felsige Hügellandschaft rund um Artà ist für Eidechsenbeobachtung perfekt: große, sonnengewärmte Kalksteinplatten bieten ideale Bedingungen. Kombination mit der Artà-Burg (Aufstieg durch Treppengassen) und den Coves d\'Artà nebenan für einen vollen Tag.',
+      duration:'2–3 Stunden', difficulty:'Leicht bergig ★☆☆', distance:'3 km', start:'Artà Ortszentrum',
+      tips:['Burg + Felsenwanderung + Coves an einem Tag kombinieren','Mittagessen im Ortskern sehr günstig','Sonnige Nachmittagsstunden: Eidechsen am aktivsten', 'Kalkstein kann rutschig sein nach Regen','Donnerstags Markt in Artà als Ergänzung'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/7/7f/Arta_Festung_%2831907483586%29.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9e/Arta_overview.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c1/Art%C3%A0_Sant_Salvador_01.jpg'],
+      komoot:'https://www.komoot.com/discover/arta/@39.6977,3.3503?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Arta+Mallorca'
+    }
+  },
+
+  // ── NATUR & WANDERN ───────────────────────────────────────────────────────
+  {
+    id:'b2', cat:'natur', emoji:'🏔️', name:'Sa Calobra + Torrent de Pareis',
+    tags:['natur','hike','drive','top'],
+    shortDesc:'Spektakulärste Bergstraße Mallorcas + Tunnel direkt zum Meer. SUV problemlos.',
+    dist:'1h 20 Min.',
+    detail: {
+      desc:'Die Fahrt über die Nus de sa Corbata-Serpentinen ist bereits das Erlebnis – mit eurem SUV kein Problem. Unten warten 2 natürliche Felsen-Tunnel zum Torrent de Pareis-Strand. Kinder werden die Tunnel lieben! Am Strand Picknick und schwimmen. Alternativ Schiff zurück nach Port de Sóller.',
+      duration:'Halbtagsausflug', difficulty:'Leicht ★☆☆', distance:'2 km Fußweg', start:'Parking Sa Calobra',
+      tips:['Früh hinfahren – Parkplatz voll ab 10 Uhr','Taschenlampe für die Tunnel = Kinder-Highlight','Kleines Schiff nach Port de Sóller buchbar','Wasser und Snacks mitbringen (wenig Infrastruktur)','Eidechsen auch hier auf den Felsen häufig'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/d/d4/Carretera_de_la_Calobra_msu-2018-4044.jpg','https://upload.wikimedia.org/wikipedia/commons/b/bd/Carretera_de_la_Calobra_msu-2018-4050.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8f/Sa_Calobra_Road_R01.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b3/Mallorca_%2821823700354%29.jpg','https://upload.wikimedia.org/wikipedia/commons/0/07/Baixant_el_barranc.jpeg'],
+      komoot:'https://www.komoot.com/discover/sa-calobra/@39.8508,2.8049?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Sa+Calobra+Mallorca'
+    }
+  },
+  {
+    id:'b3', cat:'natur', emoji:'🦅', name:'Cap Formentor Leuchtturm',
+    tags:['natur','drive'],
+    shortDesc:'Dramatische Halbinsel, Geierperspektive, Leuchtturm am Ende der Welt.',
+    dist:'1h 50 Min.',
+    detail: {
+      desc:'Die Straße zum Cap Formentor gehört zu den eindrucksvollsten Mallorcas – steil, schmal, mit Aussichtspunkten über vertikale Felswände. Geier kreisen häufig. Am Ende der Halbinsel steht ein historischer Leuchtturm. Kurze Spazierwege ab Parkplatz.',
+      duration:'Halbtagsausflug', difficulty:'Leicht ★☆☆', distance:'1–2 km Spazierwege', start:'Parkplatz Cap Formentor',
+      tips:['Früh fahren – Zufahrt nachmittags teils gesperrt','Fernglas für Geier- und Falkenbeobachtung','Kombination mit Platja de Formentor ideal','Wind am Leuchtturm: Kinder festhalten!','Mirador de Mal Pas: bester Aussichtspunkt'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/f/fa/Badia_del_cap_de_Formentor.jpeg','https://upload.wikimedia.org/wikipedia/commons/e/e4/Far_de_Formentor_Mallorca_msu_2018-4361.jpg','https://upload.wikimedia.org/wikipedia/commons/a/a4/02001_Platja_de_Formentor.jpg','https://upload.wikimedia.org/wikipedia/commons/0/07/02017_0201_Badia_de_Pollenca%2C_Formentor.jpg'],
+      komoot:'https://www.komoot.com/discover/formentor/@39.9583,3.2125?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Cap+Formentor+Leuchtturm+Mallorca'
+    }
+  },
+  {
+    id:'b5', cat:'natur', emoji:'⛪', name:'Puig de Randa & Kloster',
+    tags:['natur','hike','kids3'],
+    shortDesc:'Flacher Berg mit Kloster (13. Jh.), 30 Min. Aufstieg, Panorama über ganz Mallorca.',
+    dist:'40 Min.',
+    detail: {
+      desc:'Der Puig de Randa ist Mallorcas heiliger Berg mit Kloster aus dem 13. Jahrhundert. Fahrstraße bis fast oben, nur 15 Min. Fußweg. Oben Panoramablick über die gesamte Insel. Das Kloster ist bewohnt und frei zugänglich. Auf dem Weg viele Eidechsen auf den Felsmauern.',
+      duration:'2–3 Stunden gesamt', difficulty:'Leicht ★☆☆', distance:'1,5 km Fußweg', start:'Parkplatz unterhalb Kloster',
+      tips:['Perfekte Kombi mit Sineu-Markt mittwochs','Klosterrestaurant: günstige Mittagsgerichte','Oben windig – Jacke einpacken','Blick bis nach Palma und zum Meer an klaren Tagen','Eidechsen auf den Klostermauern häufig'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/f/fc/Algaida_-_Puig_de_Randa_01_ies.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9f/Randa_Monasteries.jpg','https://upload.wikimedia.org/wikipedia/commons/2/2b/Puigderanda00.JPG','https://upload.wikimedia.org/wikipedia/commons/d/d1/Puigderanda01.JPG'],
+      komoot:'https://www.komoot.com/discover/mallorca/@39.5254,2.9956?filter=tour_hike',
+      maps:'https://maps.apple.com/?q=Puig+de+Randa+Mallorca'
+    }
+  },
+  {
+    id:'b6', cat:'natur', emoji:'🪨', name:'Coves d\'Artà',
+    tags:['natur','kids3','half'],
+    shortDesc:'Dramatische Tropfsteinhöhlen am Meer – perfekter Regentag-Plan!',
+    dist:'35 Min.',
+    detail: {
+      desc:'Coves d\'Artà gehören zu den eindrucksvollsten Höhlen Europas – direkt am Meer mit Blick auf die Bucht beim Eingang. Riesige Kammern, dramatische Beleuchtung. Für beide Kinder ein Erlebnis.',
+      duration:'35–45 Min. geführte Tour', difficulty:'Leicht ★☆☆', distance:'200 m', start:'Canyamel Küste',
+      tips:['In der Höhle 17°C – Jacke einpacken!','Kombination mit Artà-Burg ideal','Online vorbuchen in der Hochsaison','Perfekter Regentag-Ausflug','Davor/danach: Eidechsen auf den Felsen außen'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/7/7f/Arta_Festung_%2831907483586%29.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9e/Arta_overview.jpg','https://upload.wikimedia.org/wikipedia/commons/e/ed/Art%C3%A0%2C_Balearic_Islands%2C_Spain_-_panoramio_%282%29.jpg'],
+      booking:'https://www.cuevasdearta.com/en/prices/',
+      maps:'https://maps.apple.com/?q=Coves+d+Arta+Mallorca'
+    }
+  },
+  {
+    id:'b7', cat:'natur', emoji:'🐉', name:'Coves del Drac – Drachenhöhlen',
+    tags:['natur','kids3','top'],
+    shortDesc:'Weltgrößter unterirdischer See + Live-Konzert auf dem Wasser – unvergesslich!',
+    dist:'20 Min.',
+    detail: {
+      desc:'Die Drachenhöhlen bei Porto Cristo sind eines der Naturwunder Mallorcas. Ein unterirdischer See von 177m Länge. Als Höhepunkt spielen Musiker auf kleinen Booten während das Publikum im Dunkeln lauscht. Absolute Pflicht für die Kinder!',
+      duration:'1 Stunde geführte Tour', difficulty:'Leicht ★☆☆', distance:'1,2 km in der Höhle', start:'Porto Cristo',
+      tips:['Online-Tickets kaufen – Schlangen sehr lang!','Erste Tour morgens am ruhigsten','In der Höhle 18°C – Pullover einpacken','Kleines Aquarium nebenan gut für Kinder','Davor kurze Hafenpromenade Porto Cristo'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/1/10/Interior_de_las_Cuevas_del_Drach.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8d/15_Portocolom_al_capvespre.JPG'],
+      booking:'https://www.cuevasdeldrach.com/en/venta-entradas.php',
+      maps:'https://maps.apple.com/?q=Coves+del+Drac+Porto+Cristo+Mallorca'
+    }
+  },
+  {
+    id:'b8', cat:'natur', emoji:'🌄', name:'Mirador de ses Barques',
+    tags:['natur','drive','half'],
+    shortDesc:'Spektakulärster Aussichtspunkt über Port de Sóller, Restaurant direkt dran.',
+    dist:'1h 10 Min.',
+    detail: {
+      desc:'Einer der besten Aussichtspunkte der Serra de Tramuntana mit direktem Blick auf Port de Sóller. Das Restaurant am Aussichtspunkt serviert frische Gerichte mit Panoramablick. Kombination mit Valldemossa und Sóller empfehlenswert.',
+      duration:'1–2 Stunden', difficulty:'Leicht ★☆☆', distance:'Kurzer Spaziergang', start:'Mirador-Parkplatz',
+      tips:['Morgens oder abends beste Beleuchtung', 'Kombi mit Valldemossa und Sóller sehr gut','Restaurant mittags voll – früh kommen oder reservieren','Serpentinenstraße hoch zum Kloster Lluc weiterfahren möglich'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/0/00/S%C3%B3ller_14.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c3/S%C3%B3ller_18.jpg','https://upload.wikimedia.org/wikipedia/commons/8/83/Pujada_a_l%27Ofre.jpg'],
+      maps:'https://maps.apple.com/?q=Mirador+de+ses+Barques+Mallorca'
+    }
+  },
+
+  {
+    id:'n1', cat:'natur', emoji:'🌿', name:'Parc Natural de Mondragó',
+    tags:['natur','hike','eidechse','kids3','half'],
+    shortDesc:'Geschütztes Naturparadies mit Küstenwegen, Felspools & Eidechsen – direkt ums Eck!',
+    dist:'15 Min.',
+    detail: {
+      desc:'Der Parc Natural de Mondragó liegt nur 15 Minuten vom Hotel entfernt und ist ein verstecktes Paradies: zerklüftete Küstenwege, türkisfarbene Felspools und das geschützte Naturgebiet S\'Amarador. Auf den Trockensteinmauern und Felsen tummeln sich überall Podarcis lilfordi – die endemische Mauereidechse Mallorcas. Eine der schönsten Familientouren der ganzen Reise.',
+      duration:'2–3 Stunden', difficulty:'Leicht ★☆☆', distance:'4–6 km', start:'Parkplatz Mondragó (s\'Amarador)',
+      tips:['Parkplatz kostenlos, aber früh kommen (füllt sich rasch)','Festes Schuhwerk für Felspfade','Badeklamotten einpacken – Naturpool am Weg!','Eidechsen-Tipp: auf den Trockensteinmauern sitzen sie in der Sonne','Kombi mit Cala Mondragó-Strand danach perfekt'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/d/da/Cala_mondrago.jpg','https://upload.wikimedia.org/wikipedia/commons/b/ba/CalaMondrag%C3%B3.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5e/Vista_del_parque_natural_de_Mondrag%C3%B3.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8b/Parc_natural_de_Mondrag%C3%B3_Info_01.jpg'],
+      komoot:'https://www.komoot.com/guide/508473/hiking-in-mondrago',
+      maps:'https://maps.apple.com/?q=Parc+Natural+Mondrago+Mallorca'
+    }
+  },
+    // ── KULTUR ───────────────────────────────────────────────────────────────
+  {
+    id:'c1', cat:'kultur', emoji:'🏛️', name:'Palma – Altstadt & Kathedrale',
+    tags:['kultur','full'],
+    shortDesc:'Gotische Kathedrale, Almudaina-Palast, Tapas-Gassen. Ganztagesausflug.',
+    dist:'45 Min.',
+    detail: {
+      desc:'Palmas Altstadt ist eine der schönsten des Mittelmeers. Die gotische Kathedrale La Seu dominiert die Küste. Daneben der Almudaina-Palast. Nachmittags durch die engen Gassen schlendern, Tapas essen und im Mercat de l\'Olivar einkaufen.',
+      duration:'Ganztag', difficulty:'Kein Aufstieg', distance:'3–5 km Fußweg', start:'Parking Parc de la Mar',
+      tips:['Kathedrale morgens besichtigen (kühler, weniger voll)','Mercat de l\'Olivar: Tapas-Bar direkt im Markt','Fahrradverleihe an der Promenade','Kinder mögen den Brunnen am Born-Platz','Palau March: kostenlose Skulpturenterrasse'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/1/12/Kathedrale_von_Palma_II.jpg','https://upload.wikimedia.org/wikipedia/commons/4/46/Cathedral_de_Mallorca_%2835210686464%29.jpg','https://upload.wikimedia.org/wikipedia/commons/d/d5/Valdemosa%2C_en_Baleares_%28Espa%C3%B1a%29.jpg'],
+      maps:'https://maps.apple.com/?q=Catedral+de+Mallorca+Palma'
+    }
+  },
+  {
+    id:'c2', cat:'kultur', emoji:'🎹', name:'Valldemossa',
+    tags:['kultur','half','drive'],
+    shortDesc:'Malerischstes Bergdorf, Kloster mit Chopins Zelle, blumengeschmückte Gassen.',
+    dist:'1h',
+    detail: {
+      desc:'Valldemossa gilt als eines der schönsten Dörfer Spaniens. Das Kartäuserkloster, wo Chopin und George Sand den Winter 1838/39 verbrachten, ist heute Museum. Enge Gassen mit Blumenkästen. Kombi mit Sóller und Mirador sehr empfehlenswert.',
+      duration:'2–3 Stunden', difficulty:'Leicht bergig', distance:'1–2 km Fußweg', start:'Valldemossa Parkplatz',
+      tips:['Mittags sehr voll – morgens oder nach 16 Uhr','Ensaimada (lokales Gebäck) unbedingt probieren', 'Coca mallorquina in der Bäckerei am Platz','Kinder mögen die Dorfkatzen und Brunnen'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/d/d5/Valdemosa%2C_en_Baleares_%28Espa%C3%B1a%29.jpg','https://upload.wikimedia.org/wikipedia/commons/2/2c/07170_Valldemossa%2C_Illes_Balears%2C_Spain_-_panoramio_%2868%29.jpg'],
+      maps:'https://maps.apple.com/?q=Valldemossa+Mallorca'
+    }
+  },
+  {
+    id:'c3', cat:'kultur', emoji:'🚃', name:'Vintage-Zug Palma–Sóller',
+    tags:['kultur','kids3','full','top'],
+    shortDesc:'Holzdampfzug von 1912 durch die Berge – Kinder-Highlight! Ganztag.',
+    dist:'45 Min. nach Palma',
+    detail: {
+      desc:'Der Ferrocarril de Sóller ist einer der letzten historischen Schmalspurzüge Europas. Seit 1912 durch Orangen- und Mandelplantagen hoch in die Serra de Tramuntana. Von Sóller mit der antiken Tram zum Hafen. Für Kinder ein Abenteuererlebnis!',
+      duration:'Ganztag', difficulty:'Kein Aufstieg', distance:'Zugfahrt 27 km', start:'Bahnhof Palma',
+      tips:['Tickets online vorbuchen – oft ausgebucht!','Erste Fahrt morgens: schönstes Licht, weniger Leute','In Sóller: Orangen-Eis und Zitronenpresse probieren','Rückfahrt mit Bus möglich (günstiger)','Im Zug: auf der rechten Seite sitzen für beste Aussicht'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/9/9e/Mallorca_Soller_Ferrocarril_01189.jpg','https://upload.wikimedia.org/wikipedia/commons/1/12/MAJORKA-FERROCARRIL_DE_SOLLER%2C_AB-127.jpg','https://upload.wikimedia.org/wikipedia/commons/a/a9/SFM_1.jpg','https://upload.wikimedia.org/wikipedia/commons/0/00/S%C3%B3ller_14.jpg'],
+      booking:'https://trendesoller.com/eng/train-ticket',
+      maps:'https://maps.apple.com/?q=Ferrocarril+de+Soller+Bahnhof+Palma'
+    }
+  },
+  {
+    id:'c4', cat:'kultur', emoji:'🏰', name:'Alcúdia – Altstadt & Römerruinen',
+    tags:['kultur','half'],
+    shortDesc:'Mittelalterliche Stadtmauern, römisches Theater, Di/So großer Markt.',
+    dist:'1h 10 Min.',
+    detail: {
+      desc:'Alcúdia ist eine der besterhaltenen Altstädte Mallorcas, komplett von mittelalterlichen Mauern umgeben. Das römische Theater Pollentia liegt direkt außerhalb. Dienstags und sonntags großer Markt. Flach und kinderwagentauglich.',
+      duration:'2–3 Stunden', difficulty:'Flach', distance:'2 km Fußweg', start:'Porta de Mallorca',
+      tips:['Dienstags oder sonntags für den Markt!','Römische Ruinen Pollentia kostenlos','Nahe Platja d\'Alcúdia für Strandnachmittag','Stadtmauern umrunden: toller Spaziergang für Kinder'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/5/55/Alcudia_6745.jpg','https://upload.wikimedia.org/wikipedia/commons/7/73/Alcudia_Stadtmauer.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b4/AlcudiaChurch.jpg'],
+      maps:'https://maps.apple.com/?q=Alcudia+Altstadt+Mallorca'
+    }
+  },
+  {
+    id:'c5', cat:'kultur', emoji:'🏯', name:'Artà – Burg & Altstadt',
+    tags:['kultur','kids3','half'],
+    shortDesc:'Beeindruckende Burg auf dem Hügel, Panoramablick, charmante Altstadt.',
+    dist:'30 Min.',
+    detail: {
+      desc:'Artà ist eines der authentischsten Dörfer Mallorcas. Die Festung mit Wallfahrtskirche thront über dem Ort. Kurzer aber steiler Aufstieg durch Treppengassen. Kombination mit Coves d\'Artà perfekt.',
+      duration:'2 Stunden', difficulty:'Leicht bergig ★☆☆', distance:'1,5 km', start:'Plaça de Espanya',
+      tips:['Aufstieg zur Burg: nur Treppengassen, kein Wagen','Kleine Lokale am Marktplatz sehr günstig','Donnerstags Wochenmarkt','Kombination mit Coves d\'Artà (20 Min. weiter)','Auf den Burmmauern sitzen Eidechsen!'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/7/7f/Arta_Festung_%2831907483586%29.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9e/Arta_overview.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c1/Art%C3%A0_Sant_Salvador_01.jpg','https://upload.wikimedia.org/wikipedia/commons/e/ed/Art%C3%A0%2C_Balearic_Islands%2C_Spain_-_panoramio_%282%29.jpg'],
+      maps:'https://maps.apple.com/?q=Arta+Mallorca+Burg'
+    }
+  },
+  {
+    id:'c6', cat:'kultur', emoji:'🕌', name:'Felanitx – Lokale Erkundung',
+    tags:['kultur','kids3','half'],
+    shortDesc:'Authentische Marktstadt direkt beim Hotel, Wochenmarkt sonntags.',
+    dist:'15 Min.',
+    detail: {
+      desc:'Felanitx ist eine typisch mallorquinische Landstadt ohne Touristenmassen. Die Pfarrkirche Sant Miquel dominiert den Hauptplatz. Sonntags lebhafter Wochenmarkt. Ideal für Ankunfts- oder Abreisetag.',
+      duration:'1–2 Stunden', difficulty:'Flach', distance:'1 km', start:'Plaça de Espanya',
+      tips:['Sonntags Wochenmarkt ab 9 Uhr','Töpferei und lokale Produkte kaufen','Günstige Celler-Restaurants','Weinregion – Bodega Miquel Oliver einen Kilometer außerhalb'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/6/60/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio_%283%29.jpg','https://upload.wikimedia.org/wikipedia/commons/b/ba/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio_%284%29.jpg','https://upload.wikimedia.org/wikipedia/commons/a/ad/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio.jpg'],
+      maps:'https://maps.apple.com/?q=Felanitx+Mallorca'
+    }
+  },
+
+  // ── STRAND ───────────────────────────────────────────────────────────────
+  {
+    id:'a1', cat:'beach', emoji:'🏖️', name:'Cala Mondragó',
+    tags:['beach','kids3','half'],
+    shortDesc:'Naturparkbucht mit flachem klaren Wasser – ideal für Kleinkinder, Snorkelzone.',
+    dist:'20 Min.',
+    detail: {
+      desc:'Cala Mondragó liegt im gleichnamigen Naturpark und gehört zu den schönsten Buchten Mallorcas. Das Wasser ist außergewöhnlich klar und flach. Dahinter Pinienwald zum Picknicken. Die benachbarte S\'Amarador-Bucht ist ebenfalls wunderschön.',
+      duration:'Halbtag oder länger', difficulty:'Flach', distance:'200 m Strandweg', start:'Parking Cala Mondragó',
+      tips:['Früh kommen – Parkplatz ab 11 Uhr voll','Snorkelset mitbringen: viele Fische zwischen Seegras','Kleines Café am Strand','Weg zwischen S\'Amarador und Mondragó 20 Min. sehr schön'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/5/56/Cala_Mondrag%C3%B3_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/60/Cala_Mondrag%C3%B3_02.jpg','https://upload.wikimedia.org/wikipedia/commons/1/15/Cala_Mondrag%C3%B3_03.jpg','https://upload.wikimedia.org/wikipedia/commons/e/e4/Cala_Mondrago_%2818550757754%29.jpg','https://upload.wikimedia.org/wikipedia/commons/7/79/Mondrag%C3%B3_in_4.JPG'],
+      maps:'https://maps.apple.com/?q=Cala+Mondrago+Mallorca'
+    }
+  },
+  {
+    id:'a2', cat:'beach', emoji:'🌊', name:'Es Trenc – Naturstrand',
+    tags:['beach','kids3','full'],
+    shortDesc:'Langer weißer Sandstrand, türkisblaues Wasser, kein Massentourismus.',
+    dist:'45 Min.',
+    detail: {
+      desc:'Es Trenc ist Mallorcas bekanntester Naturstrand – kein Gebäude, nur weißer Sand und türkisblaues Wasser. Das flache Wasser ist wie ein Kinderbecken. In der Nähe: Ses Covetes als Alternative.',
+      duration:'Halbtag oder Ganztag', difficulty:'Flach', distance:'Strand 2,5 km lang', start:'Parking Es Trenc',
+      tips:['Parkgebühr ~7€ – dafür weniger Leute','Sonnenschirm mitbringen (kaum Schatten)', 'Flamingos in der Salobrar de Campos sichtbar!','Süßwasser-Dusche am Parkplatz vorhanden'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/1/11/Der_berwirtschaftete_Strand_Es_Trenc.jpg','https://upload.wikimedia.org/wikipedia/commons/5/50/002_2015_06_07_Das_Blau_der_Natur.jpg'],
+      maps:'https://maps.apple.com/?q=Es+Trenc+Mallorca'
+    }
+  },
+  {
+    id:'a3', cat:'beach', emoji:'⛵', name:'Cala Pi – Felsenbucht',
+    tags:['beach','half'],
+    shortDesc:'Dramatische Felsschlucht mit türkisem Strand. Kurzer Abstieg, Wachturm oben.',
+    dist:'40 Min.',
+    detail: {
+      desc:'Cala Pi ist eine der dramatischsten Buchten Mallorcas: eine enge Felsschlucht mit kleinem Strand und intensiv türkisem Wasser. Der Abstieg dauert 15 Minuten. Oben steht ein mittelalterlicher Wachturm.',
+      duration:'Halbtag', difficulty:'Leicht (Abstieg)', distance:'15 Min. Abstieg', start:'Parkplatz oben',
+      tips:['Gutes Schuhwerk für den Abstieg','Strand klein – früh kommen','Wachturm Torre de Cala Pi für Ausblick','Kombination mit Es Trenc am selben Tag gut'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/e/e5/07639_Cala_Pi%2C_Illes_Balears%2C_Spain_-_panoramio.jpg','https://upload.wikimedia.org/wikipedia/commons/7/75/A_part_of_Cala_Pi_-_panoramio_%281%29.jpg','https://upload.wikimedia.org/wikipedia/commons/a/a2/Beach_in_Cala_P%C3%AD%2C_Mallorca%2C_Spain.jpg','https://upload.wikimedia.org/wikipedia/commons/1/1f/Cala_Pi_-_panoramio_%281%29.jpg'],
+      maps:'https://maps.apple.com/?q=Cala+Pi+Mallorca'
+    }
+  },
+  {
+    id:'a4', cat:'beach', emoji:'🐠', name:'Cala Llombards Schnorcheln',
+    tags:['beach','half'],
+    shortDesc:'Glasklares Wasser, perfekte Schnorchelbucht mit vielen Fischen.',
+    dist:'25 Min.',
+    detail: {
+      desc:'Cala Llombards hat besonders klares Wasser und gute Sichtweiten. Die Felsbrocken am Rand bieten Lebensraum für viele Fische. Auch Anfänger-Schnorchler werden begeistert sein. Kleines Restaurant am Strand.',
+      duration:'Halbtag', difficulty:'Flach', distance:'Kleiner Strand', start:'Parking Cala Llombards',
+      tips:['Beste Schnorchelbedingungen morgens','Eigenes Schnorkelset mitbringen oder leihen','Nachmittags voller','Kombination mit Cala Mondragó gut möglich'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/4/41/A_part_of_Cala_Lambards_-_panoramio_%281%29.jpg','https://upload.wikimedia.org/wikipedia/commons/4/4b/A_part_of_Cala_Lambards_-_panoramio.jpg','https://upload.wikimedia.org/wikipedia/commons/5/50/002_2015_06_07_Das_Blau_der_Natur.jpg'],
+      maps:'https://maps.apple.com/?q=Cala+Llombards+Mallorca'
+    }
+  },
+  {
+    id:'a5', cat:'beach', emoji:'🌅', name:'Platja de Formentor',
+    tags:['beach','full','drive'],
+    shortDesc:'Traumstrand am Ende einer Traumstraße. Kombination mit Cap Formentor.',
+    dist:'1h 45 Min.',
+    detail: {
+      desc:'Platja de Formentor gilt als einer der schönsten Strände Mallorcas – hohe Pinien, kristallklares Wasser, Blick auf Kaps und Berge. Ideal als Ganztagesausflug kombiniert mit dem Leuchtturm.',
+      duration:'Ganztag', difficulty:'Flach', distance:'600 m Strand', start:'Parking Platja Formentor',
+      tips:['Bus ab Port de Pollença empfohlen (Straße sehr eng)','Früh kommen – Parkplatz sehr begrenzt','Grand Hotel Formentor: historische Bar lohnt sich','Kombi mit Leuchtturm Cap Formentor (30 Min. weiter)'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/a/a4/02001_Platja_de_Formentor.jpg','https://upload.wikimedia.org/wikipedia/commons/3/34/02010_Platja_de_Formentor.jpg','https://upload.wikimedia.org/wikipedia/commons/f/fe/02017_0192_Formentor.jpg','https://upload.wikimedia.org/wikipedia/commons/a/af/02017_0198_Blick_auf_Formentor.jpg'],
+      maps:'https://maps.apple.com/?q=Platja+de+Formentor+Mallorca'
+    }
+  },
+  {
+    id:'a6', cat:'beach', emoji:'🏝️', name:'Portocolom – Hafen & Strand',
+    tags:['beach','kids3','half'],
+    shortDesc:'Direkt vom Hotel – Fischerhafen, ruhige Badebucht, Eiscreme.',
+    dist:'5 Min.',
+    detail: {
+      desc:'Portocolom ist ein originalgetreuer mallorquinischer Fischerhafen. Farbige Bootshäuser, klares Wasser, Restaurants mit frischem Fisch. Cala Marçal (5 Min.) ist flach und für Kleinkinder ideal.',
+      duration:'Flexibel', difficulty:'Flach', distance:'Am Hotel', start:'Hotel Blau Punta Reina',
+      tips:['Abendessen am Hafen: frischer Fisch unbedingt!','Bootsfahrten ab Hafen buchbar','Cala Marçal 5 Min. Fußweg: Kinderbereich flach','Sonnenuntergänge am Hafenmolo wunderschön'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/4/44/12_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/8/8d/15_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/d/dc/16_Portocolom_al_capvespre.JPG'],
+      maps:'https://maps.apple.com/?q=Portocolom+Mallorca'
+    }
+  },
+  {
+    id:'a7', cat:'beach', emoji:'⛵', name:'Bootsfahrt ab Portocolom',
+    tags:['beach','kids3','half'],
+    shortDesc:'Glasbodenboot zu versteckten Buchten, Delfine möglich.',
+    dist:'5 Min.',
+    detail: {
+      desc:'Ab Portocolom gibt es Glasbodenboote (Fische und Seegras sehen ohne zu schwimmen) und kleine Motorboote zum selber steuern. Morgens Delfinbeobachtung möglich.',
+      duration:'1,5–3 Stunden', difficulty:'Auf dem Boot', distance:'Küste östlich Portocolom', start:'Hafen Portocolom',
+      tips:['Glasbodentouren täglich ab ca. 10 Uhr','Morgens Delfinsichtung wahrscheinlicher','Sonnencreme für die Kinder, kaum Schatten','Privatboote tageweise buchbar'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/b/bc/16_Portocolom%2C_pla%C3%A7a_de_Sant_Jaume.jpg','https://upload.wikimedia.org/wikipedia/commons/d/dc/16_Portocolom_al_capvespre.JPG'],
+      maps:'https://maps.apple.com/?q=Portocolom+Hafen+Mallorca'
+    }
+  },
+
+  // ── SPASS ─────────────────────────────────────────────────────────────────
+  {
+    id:'d1', cat:'spass', emoji:'💦', name:'Hidropark Alcúdia',
+    tags:['spass','kids3','full'],
+    shortDesc:'Wasserpark mit Rutschen + Kinderbereich für alle Altersgruppen.',
+    dist:'1h 15 Min.',
+    detail: {
+      desc:'Wasserpark mit Rutschen für den 6-Jährigen und eigenem Kinderbereich für den 3-Jährigen. Gute Infrastruktur, angenehme Größe.',
+      duration:'Ganztag', difficulty:'Flach', distance:'Wasserpark', start:'Port d\'Alcúdia',
+      tips:['Online-Tickets günstiger','Eigenes Essen mitbringen (Catering teuer)','Kombination mit Alcúdia Altstadt abends'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/5/55/Alcudia_6745.jpg','https://upload.wikimedia.org/wikipedia/commons/7/73/Alcudia_Stadtmauer.jpg'],
+      booking:'https://www.hidropark.com/en/tickets/',
+      maps:'https://maps.apple.com/?q=Hidropark+Alcudia+Mallorca'
+    }
+  },
+  {
+    id:'d2', cat:'spass', emoji:'🐬', name:'Marineland Mallorca',
+    tags:['spass','kids3','full'],
+    shortDesc:'Delfinshow, Pinguine, Seehunde – für beide Kinder ein tolles Erlebnis.',
+    dist:'55 Min.',
+    detail: {
+      desc:'Marineland bietet Delfinshows, Seehundshow, Pinguine und einen kleinen Wasserbereich. Für den 3-Jährigen ist das Streicheln der Tiere ein Highlight, der 6-Jährige liebt die Shows.',
+      duration:'Halbtag–Ganztag', difficulty:'Flach', distance:'Park', start:'Santa Ponça',
+      tips:['Shows haben feste Startzeiten – vorher prüfen','Delfinshow vorne: Plätze werden nass!','Frühstücken vor der Anfahrt (teures Paressen)','Rückfahrt: Strand Santa Ponça für Abkühlung'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/1/10/Interior_de_las_Cuevas_del_Drach.jpg'],
+      booking:'https://www.marineland.es/en/tickets/',
+      maps:'https://maps.apple.com/?q=Marineland+Mallorca'
+    }
+  },
+  {
+    id:'d3', cat:'spass', emoji:'🚴', name:'Fahrradtour Portocolom',
+    tags:['spass','natur','kids3','half'],
+    shortDesc:'Flache Küstentour ab Hotel mit Kinderrädern oder Anhänger.',
+    dist:'Am Hotel',
+    detail: {
+      desc:'Flacher Küstenweg rund um Portocolom. Kinderfahrräder und Anhänger leihbar direkt in Portocolom. Vorbei an kleinen Buchten, Eidechsen auf den Felsmauern, Eisessen am Hafen.',
+      duration:'1,5–2 Stunden', difficulty:'Flach', distance:'5–10 km', start:'Hotel',
+      tips:['Verleih am Hafen Portocolom ~10€/Tag','Morgens fahren (vor Hitze)','Pause am Hafen für Eiscreme','E-Bikes mit Kinderanhänger verfügbar'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/4/44/12_Portocolom_al_capvespre.JPG'],
+      maps:'https://maps.apple.com/?q=Portocolom+Mallorca'
+    }
+  },
+
+  // ── ESSEN ─────────────────────────────────────────────────────────────────
+  {
+    id:'e1', cat:'food', emoji:'🥩', name:'Mercat de Sineu (nur Mi!)',
+    tags:['food','kultur','kids3','half','top'],
+    shortDesc:'★ NUR MITTWOCHS: Schönster Markt mit Lebendvieh – Kinder lieben es!',
+    dist:'35 Min.',
+    detail: {
+      desc:'Der Mercat de Sineu ist der älteste und authentischste Wochenmarkt Mallorcas seit dem 13. Jahrhundert. Besonderes Highlight: die Viehmarkt-Abteilung mit Schweinen, Hühnern, Schafen. Dazu lokale Produkte, Töpferei, Sobrasada.',
+      duration:'2–3 Stunden', difficulty:'Flach', distance:'Marktplatz Sineu', start:'Sineu',
+      tips:['NUR MITTWOCHS – einzige Chance im Urlaub!','Ab 9 Uhr, bis ca. 13 Uhr','Sobrasada (mallorquinische Würzwurst) kaufen','Kombi mit Puig de Randa danach'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/0/00/07510_Sineu%2C_Illes_Balears%2C_Spain_-_panoramio_%281%29.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5f/07510_Sineu%2C_Illes_Balears%2C_Spain_-_panoramio_%2849%29.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b0/Sin%C3%A9u%2C_en_Baleares_%28Espa%C3%B1a%29.jpg'],
+      maps:'https://maps.apple.com/?q=Mercat+de+Sineu+Mallorca'
+    }
+  },
+  {
+    id:'e2', cat:'food', emoji:'🍷', name:'Celler-Restaurant Felanitx',
+    tags:['food','kids3','half'],
+    shortDesc:'Typisches Kellerrestaurant, günstig, authentisch, kinderfreundlich.',
+    dist:'15 Min.',
+    detail: {
+      desc:'Mallorquinische Celler-Restaurants in ehemaligen Weinkeltern. In Felanitx mehrere davon. Menü des Tages für 10–14€. Ferkelbrat (Porcella) und Sopas Mallorquines unbedingt probieren.',
+      duration:'1,5 Stunden', difficulty:'Kein Aufstieg', distance:'Felanitx Innenstadt', start:'Felanitx',
+      tips:['Mittagessen (13–15 Uhr) für Menü des Tages', 'Kinder bekommen Halbe-Portionen überall','Lokale Rotweine sehr günstig und gut','Reservierung empfohlen'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/6/60/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio_%283%29.jpg','https://upload.wikimedia.org/wikipedia/commons/b/ba/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio_%284%29.jpg'],
+      maps:'https://maps.apple.com/?q=Celler+Restaurant+Felanitx+Mallorca'
+    }
+  },
+  {
+    id:'e3', cat:'food', emoji:'🐟', name:'Abendessen Hafen Portocolom',
+    tags:['food','kids3','half'],
+    shortDesc:'Frischeste Paella direkt am Fischerhafen – perfekter Urlaubsabschluss.',
+    dist:'5 Min.',
+    detail: {
+      desc:'Der Hafen von Portocolom hat gute Fischrestaurants direkt am Wasser. Paella frisch vom Fang, Meeresfrüchte hervorragend. Abendessen mit Hafenblick und Sonnenuntergang.',
+      duration:'1,5–2 Stunden', difficulty:'Flach', distance:'5 Min. vom Hotel', start:'Hafen Portocolom',
+      tips:['Abends reservieren empfohlen', 'Paella für 2 bestellen und teilen','Fritura mallorquina (gemischte Meeresfrüchte) sehr gut','Kinder mögen die Boote beim Warten anschauen'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/d/dc/16_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/8/8d/15_Portocolom_al_capvespre.JPG'],
+      maps:'https://maps.apple.com/?q=Restaurant+Portocolom+Hafen+Mallorca'
+    }
+  },
+  {
+    id:'e4', cat:'food', emoji:'🫒', name:'Mercat de l\'Olivar Palma',
+    tags:['food','kultur','half'],
+    shortDesc:'Große überdachte Markthalle mit Tapas-Bar – kühl und entspannend.',
+    dist:'45 Min.',
+    detail: {
+      desc:'Palmas beste Markthalle – Fisch, Fleisch, Gemüse, Oliven, Käse. Tapas-Bar direkt im Markt ideal für Mittagessen. Kühl, überdacht, perfekt an heißen Tagen.',
+      duration:'1–2 Stunden', difficulty:'Flach', distance:'Palma Innenstadt', start:'Mercat de l\'Olivar',
+      tips:['Dienstags/donnerstags frischester Fischmarkt','Tapas-Bar öffnet um 12 Uhr','Lokale Käsesorten und Sobrasada mitnehmen','Kombi mit Palma Altstadt empfehlenswert'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/1/12/Kathedrale_von_Palma_II.jpg','https://upload.wikimedia.org/wikipedia/commons/4/46/Cathedral_de_Mallorca_%2835210686464%29.jpg'],
+      maps:'https://maps.apple.com/?q=Mercat+de+l+Olivar+Palma+de+Mallorca'
+    }
+  },
+];
+
+// ── SUGGESTED PLAN ───────────────────────────────────────────────────────────
+const suggestedPlan = {
+  '18.05': ['a6','e3'], '19.05': ['b7','a4'], '20.05': ['e1','b5'],
+  '21.05': ['l3','a1'], '22.05': ['c1','e4'], '23.05': ['b6','c5'],
+  '24.05': ['b2'],      '25.05': ['c3'],      '26.05': ['l1','c2'],
+  '27.05': ['a2','e3'],
+};
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let dayPlans = {};
+weatherData.forEach(d => { dayPlans[d.date] = []; });
+let draggedId = null, dragSource = null, dragSourceDate = null;
+let currentModalId = null;
+let carouselIndex = 0;
+
+// ── WEATHER ──────────────────────────────────────────────────────────────────
+function renderWeather() {
+  document.getElementById('weatherDays').innerHTML = weatherData.map(d => `
+    <div class="weather-day${d.rain >= 20 ? ' rain-warn' : ''}">
+      <div class="wd-date">${d.date} ${d.day}</div>
+      <div class="wd-icon">${d.icon}</div>
+      <div class="wd-temp">${d.high}° / ${d.low}°</div>
+      <div class="wd-rain">💧 ${d.rain}%</div>
+      <div class="wd-desc">${d.desc}</div>
+    </div>`).join('');
+}
+
+// ── POOL ─────────────────────────────────────────────────────────────────────
+const catOrder = ['eidechse','natur','kultur','beach','spass','food'];
+const catLabels = {
+  eidechse:'🦎 Eidechsen-Wanderungen', beach:'🏖️ Strand & Baden',
+  natur:'🥾 Natur & Wandern', kultur:'🏛️ Kultur & Ausflüge',
+  spass:'🎡 Spaß & Familie', food:'🥘 Essen & Märkte'
+};
+const collapsed = {};
+
+function tagLabel(t) {
+  return ({beach:'🏖 Strand', natur:'🌿 Natur', kultur:'🏛 Kultur', spass:'🎡 Spaß',
+    food:'🍽 Essen', hike:'🥾 Wandern', drive:'🚗 Ausflug', half:'½ Tag', full:'1 Tag',
+    kids3:'👶 ab 3', top:'⭐ Top', eidechse:'🦎 Eidechsen'})[t] || t;
+}
+
+function renderPool(filter = '') {
+  const placed = getPlacedIds();
+  const fl = filter.toLowerCase();
+  const pool = document.getElementById('activityPool');
+  pool.innerHTML = '';
+  let totalAvail = 0;
+
+  catOrder.forEach(cat => {
+    const avail = activities.filter(a =>
+      a.cat === cat && !placed.has(a.id) &&
+      (fl === '' || a.name.toLowerCase().includes(fl) ||
+       (a.shortDesc||'').toLowerCase().includes(fl) || a.tags.join(' ').includes(fl))
+    );
+    totalAvail += avail.length;
+    if (!avail.length) return;
+
+    const sec = document.createElement('div');
+    sec.className = 'category-section';
+    sec.innerHTML = `
+      <div class="category-header ${cat}" onclick="toggleCat('${cat}')">
+        ${catLabels[cat]}
+        <span class="cat-count">${avail.length}</span>
+        <span class="category-toggle">${collapsed[cat] ? '▶' : '▼'}</span>
+      </div>
+      <div id="cat-${cat}" style="${collapsed[cat] ? 'display:none' : ''}">
+        ${avail.map(a => `
+          <div class="activity-card${a.cat==='eidechse'?' eidechse-card':''}" data-id="${a.id}" draggable="true" onclick="openModal('${a.id}')">
+            <div class="card-emoji">${a.emoji}</div>
+            <div class="card-info">
+              <div class="card-name">${a.name}</div>
+              <div class="card-desc-short">${a.shortDesc||''}</div>
+              <div class="card-meta">${a.tags.map(t=>`<span class="tag ${t}">${tagLabel(t)}</span>`).join('')}</div>
+              <div class="card-dist">📍 ${a.dist} ab Hotel &nbsp;·&nbsp; <span style="color:#93c5fd;font-size:0.59rem">ⓘ klicken</span></div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    pool.appendChild(sec);
+  });
+
+  document.getElementById('poolCounter').innerHTML =
+    `<span>${totalAvail}</span> von ${activities.length} verfügbar · ${getPlacedIds().size} eingeplant`;
+  bindPoolDrag();
+}
+
+function bindPoolDrag() {
+  document.querySelectorAll('#activityPool .activity-card').forEach(card => {
+    card.addEventListener('dragstart', e => {
+      draggedId = card.dataset.id; dragSource = 'pool'; dragSourceDate = null;
+      e.dataTransfer.effectAllowed = 'copy';
+      setTimeout(() => card.classList.add('dragging'), 0);
+    });
+    card.addEventListener('dragend', () => card.classList.remove('dragging'));
+  });
+}
+
+function toggleCat(cat) { collapsed[cat] = !collapsed[cat]; renderPool(document.getElementById('searchBox').value); }
+function filterCards(v) { renderPool(v); }
+function getPlacedIds() { return new Set(Object.values(dayPlans).flat()); }
+
+// ── DAYS ─────────────────────────────────────────────────────────────────────
+function renderDays() {
+  const grid = document.getElementById('daysGrid');
+  grid.innerHTML = '';
+  weatherData.forEach(d => {
+    const items = dayPlans[d.date];
+    const col = document.createElement('div');
+    col.className = 'day-column';
+    col.id = `day-${d.date}`;
+    col.innerHTML = `
+      <div class="day-header ${dayColors[d.day]||'mo'}">
+        <div class="day-header-left">
+          <span class="day-header-day">${d.day}, ${d.date}</span>
+          ${d.tip?`<span class="day-header-tip">${d.tip}</span>`:''}
+        </div>
+        <div class="day-weather-mini">
+          <span>${d.icon} ${d.high}°</span>
+          <span class="rain-pct">💧${d.rain}%</span>
+        </div>
+      </div>
+      <div class="day-drop-zone ${items.length===0?'empty':''}" id="zone-${d.date}"
+           ondragover="onDragOver(event,'${d.date}')" ondragleave="onDragLeave(event,'${d.date}')" ondrop="onDrop(event,'${d.date}')">
+        ${items.map((id,i)=>{
+          const a = activities.find(x=>x.id===id);
+          if(!a) return '';
+          const tt = a.tags.includes('full')?'Ganztag':a.tags.includes('half')?'½ Tag':'';
+          return `<div class="placed-card${a.cat==='eidechse'?' eidechse-placed':''}" data-id="${id}" data-date="${d.date}" onclick="openModal('${id}')">
+            <span class="p-emoji">${a.emoji}</span><span class="p-name">${a.name}</span>
+            ${tt?`<span class="p-time">${tt}</span>`:''}
+            <button class="remove-btn" onclick="event.stopPropagation();removeFromDay('${d.date}',${i})">×</button>
+          </div>`;
+        }).join('')}
+      </div>`;
+    grid.appendChild(col);
+
+    col.querySelectorAll('.placed-card').forEach(pc => {
+      pc.setAttribute('draggable','true');
+      pc.addEventListener('dragstart', e => {
+        draggedId = pc.dataset.id; dragSource = 'day'; dragSourceDate = pc.dataset.date;
+        e.dataTransfer.effectAllowed = 'move'; e.stopPropagation();
+      });
+    });
+  });
+}
+
+// ── DRAG & DROP ───────────────────────────────────────────────────────────────
+function onDragOver(e, date) { e.preventDefault(); document.getElementById(`day-${date}`)?.classList.add('drag-over'); }
+function onDragLeave(e, date) { document.getElementById(`day-${date}`)?.classList.remove('drag-over'); }
+function onDrop(e, date) {
+  e.preventDefault();
+  document.getElementById(`day-${date}`)?.classList.remove('drag-over');
+  if (!draggedId) return;
+  if (dragSource==='day' && dragSourceDate && dragSourceDate!==date) {
+    const idx = dayPlans[dragSourceDate].indexOf(draggedId);
+    if (idx>-1) dayPlans[dragSourceDate].splice(idx,1);
+  }
+  if (!dayPlans[date].includes(draggedId)) dayPlans[date].push(draggedId);
+  draggedId = null;
+  renderDays(); renderPool(document.getElementById('searchBox').value);
+}
+function removeFromDay(date, i) {
+  dayPlans[date].splice(i,1);
+  renderDays(); renderPool(document.getElementById('searchBox').value);
+}
+
+// ── CAROUSEL ─────────────────────────────────────────────────────────────────
+let carouselImages = [];
+let carouselCurrent = 0;
+
+function buildCarousel(images, emoji, cat) {
+  carouselImages = images || [];
+  carouselCurrent = 0;
+
+  if (!carouselImages.length) {
+    return `<div class="carousel"><div class="carousel-slide" style="height:240px;display:flex;align-items:center;justify-content:center;background:${getCatGrad(cat)};border-radius:16px 16px 0 0;font-size:5rem">${emoji}</div></div>`;
+  }
+
+  const slides = carouselImages.map(url => `
+    <div class="carousel-slide">
+      <img src="${url}"
+           onerror="this.parentNode.style.background='${getCatGrad(cat)}';this.style.display='none'"
+           alt="">
+    </div>`).join('');
+
+  const dots = carouselImages.map((_,i) =>
+    `<button class="carousel-dot${i===0?' active':''}" onclick="goSlide(${i})"></button>`).join('');
+
+  return `
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="carouselTrack">${slides}</div>
+      ${carouselImages.length>1 ? `
+        <button class="carousel-btn carousel-prev" onclick="stepCarousel(-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="stepCarousel(1)">›</button>
+        <div class="carousel-dots" id="carouselDots">${dots}</div>
+        <div class="carousel-counter" id="carouselCounter">1 / ${carouselImages.length}</div>` : ''}
+    </div>`;
+}
+
+function stepCarousel(dir) {
+  if (!carouselImages.length) return;
+  carouselCurrent = (carouselCurrent + dir + carouselImages.length) % carouselImages.length;
+  updateCarousel();
+}
+function goSlide(i) { carouselCurrent = i; updateCarousel(); }
+function updateCarousel() {
+  const track = document.getElementById('carouselTrack');
+  if (track) track.style.transform = `translateX(-${carouselCurrent * 100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===carouselCurrent));
+  const counter = document.getElementById('carouselCounter');
+  if (counter) counter.textContent = `${carouselCurrent+1} / ${carouselImages.length}`;
+}
+
+function getCatGrad(cat) {
+  return ({beach:'linear-gradient(135deg,#0077b6,#90e0ef)', natur:'linear-gradient(135deg,#2d6a4f,#95d5b2)',
+    kultur:'linear-gradient(135deg,#7c5cbf,#c8b8f0)', spass:'linear-gradient(135deg,#e07a5f,#fde8e4)',
+    food:'linear-gradient(135deg,#b45309,#fef3c7)', eidechse:'linear-gradient(135deg,#4d7c0f,#a3e635)'})[cat] || '#e5e7eb';
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+function openModal(id) {
+  const a = activities.find(x => x.id === id);
+  if (!a) return;
+  currentModalId = id;
+  const d = a.detail || {};
+
+  document.getElementById('carouselContainer').innerHTML = buildCarousel(d.images, a.emoji, a.cat);
+
+  document.getElementById('modalTitle').textContent = `${a.emoji} ${a.name}`;
+  document.getElementById('modalTags').innerHTML =
+    a.tags.map(t => `<span class="modal-tag tag ${t}">${tagLabel(t)}</span>`).join('');
+
+  // Lizard info box
+  const lb = document.getElementById('modalLizardBox');
+  if (a.lizardInfo) {
+    lb.innerHTML = `<div class="modal-lizard-box">🦎 <strong>Eidechsen-Tipp:</strong> ${a.lizardInfo}</div>`;
+  } else {
+    lb.innerHTML = '';
+  }
+
+  document.getElementById('modalDesc').textContent = d.desc || '';
+
+  const grid = document.getElementById('modalGrid');
+  grid.innerHTML = '';
+  if (d.duration)   grid.innerHTML += infoBox('⏱ Dauer', d.duration);
+  if (d.difficulty) grid.innerHTML += infoBox('💪 Schwierigkeit', d.difficulty);
+  if (d.distance)   grid.innerHTML += infoBox('📏 Distanz', d.distance);
+  if (d.start)      grid.innerHTML += infoBox('📍 Start', d.start);
+
+  const tips = document.getElementById('modalTips');
+  tips.innerHTML = (d.tips && d.tips.length)
+    ? `<h4>💡 Tipps</h4><ul>${d.tips.map(t=>`<li>${t}</li>`).join('')}</ul>` : '';
+
+  const actions = document.getElementById('modalActions');
+  actions.innerHTML = '';
+  if (d.booking) actions.innerHTML += `<a class="modal-btn modal-btn-booking" href="${d.booking}" target="_blank">🎟 Jetzt buchen</a>`;
+  if (d.komoot) actions.innerHTML += `<a class="modal-btn modal-btn-komoot" href="${d.komoot}" target="_blank">🗺 Komoot Route</a>`;
+  if (d.maps)   actions.innerHTML += `<a class="modal-btn modal-btn-maps"   href="${d.maps}"   target="_blank">📍 Apple Maps</a>`;
+
+  const sel = document.getElementById('daySelect');
+  sel.innerHTML = weatherData.map(w => {
+    const already = dayPlans[w.date].includes(id);
+    return `<option value="${w.date}" ${already?'disabled':''}>${w.day}, ${w.date} ${w.icon}${already?' ✓':''}</option>`;
+  }).join('');
+
+  document.getElementById('modalDaySelector').style.display = getPlacedIds().has(id) ? 'none' : 'block';
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+
+function infoBox(label, value) {
+  return `<div class="modal-info-box"><div class="modal-info-label">${label}</div><div class="modal-info-value">${value}</div></div>`;
+}
+
+function addFromModal() {
+  const date = document.getElementById('daySelect').value;
+  if (!currentModalId || !date) return;
+  if (!dayPlans[date].includes(currentModalId)) {
+    dayPlans[date].push(currentModalId);
+    renderDays(); renderPool(document.getElementById('searchBox').value);
+    showToast(`✅ ${activities.find(a=>a.id===currentModalId)?.name} → ${date}`);
+  }
+  closeModal();
+}
+
+function closeModal() { document.getElementById('modalBackdrop').classList.remove('open'); currentModalId = null; }
+function handleBackdropClick(e) { if (e.target===document.getElementById('modalBackdrop')) closeModal(); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+
+// ── ACTIONS ───────────────────────────────────────────────────────────────────
+function loadSuggestedPlan() {
+  Object.keys(suggestedPlan).forEach(d => { dayPlans[d] = [...suggestedPlan[d]]; });
+  renderDays(); renderPool(document.getElementById('searchBox').value);
+  showToast('✨ Vorgeschlagener 10-Tage-Plan geladen!');
+}
+function clearAll() {
+  weatherData.forEach(d => { dayPlans[d.date] = []; });
+  renderDays(); renderPool(document.getElementById('searchBox').value);
+  showToast('🗑 Plan geleert');
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderWeather(); renderPool(); renderDays();
+</script>
+</body>
+</html>
