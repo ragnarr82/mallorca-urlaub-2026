@@ -197,6 +197,7 @@
     font-size: 0.78rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.15s; }
   .modal-btn-komoot    { background: #6aa84f; color: white; } .modal-btn-komoot:hover { background: #5a9040; }
   .modal-btn-maps      { background: #4285f4; color: white; } .modal-btn-maps:hover { background: #3367d6; }
+  .modal-btn-walk      { background: #059669; color: white; } .modal-btn-walk:hover  { background: #047857; }
   .modal-btn-booking   { background: #dc2626; color: white; } .modal-btn-booking:hover { background: #b91c1c; }
   .modal-btn-add       { background: var(--sun); color: #1a1a2e; } .modal-btn-add:hover { background: #e09518; }
   .modal-btn-secondary { background: #f3f4f6; color: #374151; } .modal-btn-secondary:hover { background: #e5e7eb; }
@@ -228,6 +229,8 @@
   .hike-card-btn { padding: 6px 11px; border-radius: 7px; font-size: 0.72rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; }
   .hike-card-btn.maps { background: #4285f4; color: white; }
   .hike-card-btn.maps:hover { background: #3367d6; }
+  .hike-card-btn.walk { background: #059669; color: white; }
+  .hike-card-btn.walk:hover { background: #047857; }
   .hike-card-btn.komoot { background: #6aa84f; color: white; }
   .hike-card-btn.komoot:hover { background: #5a9040; }
   .hike-card-btn.detail { background: white; color: #374151; border: 1px solid #d1d5db; cursor: pointer; }
@@ -324,7 +327,7 @@
       <button class="modal-close" onclick="closeHikesOverview()">✕</button>
     </div>
     <div class="hikes-actions">
-      <a id="hikesAllMapBtn" class="modal-btn modal-btn-maps" href="#" target="_blank">🗺 Alle Parkplätze in Apple Maps öffnen</a>
+      <a id="hikesAllMapBtn" class="modal-btn modal-btn-maps" href="#" target="_blank">🗺 Multi-Stop-Route ab Hotel über alle Parkplätze</a>
     </div>
     <div class="hikes-body" id="hikesList"></div>
   </div>
@@ -355,7 +358,7 @@ const activities = [
     id:'l1', cat:'eidechse', emoji:'🦎', name:'Barranc de Biniaraix – Eidechsenparadies',
     tags:['natur','hike','eidechse','top'],
     shortDesc:'★ Beste Eidechsenwanderung! Tausende Podarcis lilfordi auf uralten Steinmauern.',
-    dist:'55 Min.',
+    dist:'1h 15 Min.',
     lizardInfo:'Absolute Eidechsen-Hochburg! Die jahrtausendealten Trockensteinmauern sind dicht besiedelt mit Podarcis lilfordi – der endemischen Mauereidechse Mallorcas. Kinder können sie aus nächster Nähe beobachten, die Tiere sind sehr zutraulich.',
     detail: {
       desc:'Der Barranc de Biniaraix ist nicht nur die schönste Wanderung Mallorcas – er ist auch das beste Eidechsen-Biotop der Insel. Tausende der endemischen Podarcis lilfordi (Mallorca-Mauereidechse) sonnen sich auf den Trockensteinmauern. Die Kinder können sie aus wenigen Zentimetern Entfernung beobachten! Nach der Wanderung (2h, flach) Mittagessen in Sóller.',
@@ -365,31 +368,33 @@ const activities = [
       tips:['Mit dem Auto bis zum Parkplatz am Ortseingang – nicht ins Dorf hineinfahren!','Eidechsen sind morgens aktiver (Sonnenbaden!)', 'Kinder nicht rennen – Tiere bleiben dann sitzen','Kleines Stück Brot hinhalten: manche fressen aus der Hand','Fernglas für Detailfotos empfohlen','Danach Vintage-Tram in Sóller zum Hafen kombinierbar'],
       images:['https://upload.wikimedia.org/wikipedia/commons/3/3c/Barranc_de_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/6/67/Engstelle_im_Barranc_de_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5d/Pflasterweg_in_der_Schlucht_von_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/d/de/Torrent_de_Biniaraix.jpg'],
       komoot:'https://www.komoot.com/discover/soller/@39.7696,2.7159?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Cam%C3%AD+de+Sa+Figuera+Biniaraix&ll=39.7665,2.7308'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.7670,2.7430&dirflg=d',
+      walkRoute:'https://maps.apple.com/?saddr=39.7670,2.7430&daddr=39.7836,2.7589&dirflg=w'
     }
   },
   {
-    id:'l2', cat:'eidechse', emoji:'🦎', name:'Camí de Ronda – Küstenpfad',
+    id:'l2', cat:'eidechse', emoji:'🦎', name:'Küstenpfad Cala Mandia → Cala Estany',
     tags:['natur','hike','eidechse','kids3','half'],
-    shortDesc:'Felsiger Küstenpfad ab Hotel: massenhaft Eidechsen auf Steinen & Felswänden.',
-    dist:'10 Min.',
-    lizardInfo:'Küstennahe Felsen und alte Steinmauern sind der ideale Lebensraum für Podarcis lilfordi. Auf dem Camí de Ronda kann man pro 100m Weg locker 20–30 Eidechsen sehen – perfekt für Kinder!',
+    shortDesc:'Direkt vom Hotel: Felsenpfad über drei Buchten – Eidechsen-Hochburg & Felspools.',
+    dist:'0 Min. (vom Hotel)',
+    lizardInfo:'Die felsige Küste zwischen Cala Mandia und Cala Estany d\'en Mas ist Eidechsen-Hochburg: auf jeder Trockensteinmauer und Felsplatte sonnt sich Podarcis lilfordi. Pro 100m Weg locker 20–30 Eidechsen!',
     detail: {
-      desc:'Der Camí de Ronda ist ein uralter Küstenwächterweg, der die Buchten von Portocolom verbindet. Die felsigen Abschnitte wimmeln von Eidechsen – Podarcis lilfordi sonnt sich auf jedem Stein. Dazwischen kleine versteckte Badebuchten zum Abkühlen. Ideal für Kinder: kurz, abwechslungsreich, immer neue Eidechsen!',
-      route:'Vom Hotel direkt zu Fuß auf den Küstenweg. Variante Süd (empfohlen, ~3 km): Richtung Faro de Portocolom (Leuchtturm) – über Felsplatten mit Hunderten Eidechsen, vorbei an versteckten Mini-Buchten, bis zum historischen Leuchtturm an der Hafeneinfahrt. Variante Nord (~3 km): Richtung Cala Marçal – über naturbelassene Felsküste mit Felspools (kleine Krebse, Seeigel), endet am Sandstrand der Cala Marçal (Eis & Schwimmen).',
-      parking:'Kein Parkplatz nötig – der Weg startet direkt am Hotel!',
-      duration:'1,5–2,5 Stunden (flexibel)', difficulty:'Leicht ★☆☆', distance:'3–6 km', start:'Direkt am Hotel (kein Auto nötig)',
-      tips:['Direkt ab Hotel – kein Auto nötig!','Kinder brauchen Schlüpfschuhe für die Felsen','Kombination mit Badebucht unterwegs einplanen','Morgens und abends die meisten Eidechsen aktiv','Kleine Tintenfische und Krebse in den Felspools entdecken'],
+      desc:'Der historische Küstenpfad startet direkt am Hotel und führt entlang der zerklüfteten Felsküste über drei aufeinanderfolgende Buchten: Cala Mandia → Cala Anguila → Cala Mendia → Cala Estany d\'en Mas. Die Felsabschnitte wimmeln nur so von Eidechsen, dazwischen kleine Strände zum Abkühlen. Ideal für Kinder: kurz, abwechslungsreich, immer neue Eidechsen!',
+      route:'Vom Hotel über die Klippenpromenade zur Cala Anguila (~700 m, weißer Sandstrand). Weiter über Felspfad zur Cala Mendia (~500 m, kleine Familienbucht). Letzter Abschnitt steiniger zur Cala Estany d\'en Mas (~1,2 km, Felspools & Sandbucht). Highlights: hunderte Eidechsen auf den Trockensteinmauern, drei nebeneinanderliegende Buchten, Felspools mit kleinen Krebsen, türkises Wasser, Eis am Strandkiosk in Cala Anguila.',
+      parking:'Kein Parkplatz nötig – startet direkt am Hotel!',
+      duration:'1,5–2,5 Stunden (flexibel)', difficulty:'Leicht ★☆☆', distance:'2,5–5 km', start:'Direkt am Hotel Blau Punta Reina',
+      tips:['Direkt ab Hotel – kein Auto nötig!','Kinder brauchen Schlüpfschuhe für die Felsen','Badeklamotten unbedingt einpacken (3 Buchten unterwegs)','Morgens und abends: meiste Eidechsen aktiv','In Cala Estany d\'en Mas ist die Wendekehr – gleicher Weg zurück','Strandkiosk in Cala Anguila für Eis-Pause'],
       images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/66/Podacis_lilfordi_lilfordi.jpg','https://upload.wikimedia.org/wikipedia/commons/4/44/12_Portocolom_al_capvespre.JPG'],
-      komoot:'https://www.komoot.com/discover/portocolom/@39.4167,3.2667?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Portocolom+coastal+path+Mallorca'
+      komoot:'https://www.komoot.com/discover/cala-mandia/@39.5394,3.3186?filter=tour_hike',
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.5520,3.3343&dirflg=w',
+      walkRoute:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.5520,3.3343&dirflg=w'
     }
   },
   {
     id:'l3', cat:'eidechse', emoji:'🦎', name:'Parc Natural Llevant – Eidechsenpfad',
     tags:['natur','hike','eidechse','kids3','half'],
     shortDesc:'Naturpark direkt am Hotel: Eidechsen, Falken, Kaninchen – Tier-Safari für Kinder.',
-    dist:'15 Min.',
+    dist:'35 Min.',
     lizardInfo:'Im Naturpark Llevant leben besonders viele Eidechsen auf den trockenen Felsplatten und alten Mauern. Auch Falken, Hasen und Wildkaninchen sind häufig – eine richtige Mini-Safari!',
     detail: {
       desc:'Der Naturpark ist ein Geheimtipp für Tierbeobachtungen. Neben den allgegenwärtigen Eidechsen fliegen Falken über dem Pinienwald, Kaninchen huschen durchs Gestrüpp. Breite Wege, keine schwierigen Abschnitte – der 3-Jährige kommt problemlos mit. Perfekter Nachmittagsausflug oder Ergänzung zum Strandtag.',
@@ -399,7 +404,8 @@ const activities = [
       tips:['Mit dem Auto ab Artà die Schotterstraße ins Naturschutzgebiet – langsam fahren!','Früh morgens: meiste Tiere aktiv', 'Fernglas mitbringen für Falken', 'Kinder ruhig halten = mehr Eidechsen sehen','Kombination mit Cala Mondragó danach ideal','Keine Verpflegung vor Ort – Picknick einpacken'],
       images:['https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/66/Podacis_lilfordi_lilfordi.jpg','https://upload.wikimedia.org/wikipedia/commons/7/79/Mondrag%C3%B3_in_4.JPG','https://upload.wikimedia.org/wikipedia/commons/5/56/Cala_Mondrag%C3%B3_01.jpg'],
       komoot:'https://www.komoot.com/discover/llevant/@39.656,3.400?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Aparcament+S+Alqueria+Vella+Arta&ll=39.7244,3.3636'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.7150,3.3530&dirflg=d',
+      walkRoute:'https://maps.apple.com/?saddr=39.7150,3.3530&daddr=39.7359,3.3691&dirflg=w'
     }
   },
   {
@@ -416,7 +422,8 @@ const activities = [
       tips:['Auto am Ortsrand parken – Altstadt ist Fußgängerzone','Burg + Felsenwanderung + Coves an einem Tag kombinieren','Mittagessen im Ortskern sehr günstig','Sonnige Nachmittagsstunden: Eidechsen am aktivsten', 'Kalkstein kann rutschig sein nach Regen','Dienstags Markt in Artà als Ergänzung'],
       images:['https://upload.wikimedia.org/wikipedia/commons/7/7f/Arta_Festung_%2831907483586%29.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9e/Arta_overview.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c1/Art%C3%A0_Sant_Salvador_01.jpg'],
       komoot:'https://www.komoot.com/discover/arta/@39.6977,3.3503?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Aparcament+Costa+i+Llobera+Arta&ll=39.6944,3.3500'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.6920,3.3490&dirflg=d',
+      walkRoute:'https://maps.apple.com/?saddr=39.6920,3.3490&daddr=39.6932,3.3508&dirflg=w'
     }
   },
 
@@ -425,7 +432,7 @@ const activities = [
     id:'b2', cat:'natur', emoji:'🏔️', name:'Sa Calobra + Torrent de Pareis',
     tags:['natur','hike','drive','top'],
     shortDesc:'Spektakulärste Bergstraße Mallorcas + Tunnel direkt zum Meer. SUV problemlos.',
-    dist:'1h 20 Min.',
+    dist:'2h 0 Min.',
     detail: {
       desc:'Die Fahrt über die Nus de sa Corbata-Serpentinen ist bereits das Erlebnis – mit eurem SUV kein Problem. Unten warten 2 natürliche Felsen-Tunnel zum Torrent de Pareis-Strand. Kinder werden die Tunnel lieben! Am Strand Picknick und schwimmen. Alternativ Schiff zurück nach Port de Sóller.',
       route:'Vom kostenpflichtigen Parkplatz Sa Calobra ca. 5 Min. flach betoniert zur Hafenpromenade. Dort biegen wir links ab und gehen durch zwei spektakuläre, in den Fels gehauene Tunnel (Taschenlampen mitnehmen!) zum Torrent de Pareis-Strand. Highlights: legendäre "Nus de sa Corbata"-Knoten-Serpentine bei der Anfahrt, zwei Felstunnel direkt am Wasser, Kiesel-Strand zwischen 200 m hohen Felswänden, Mündung der Wildschlucht Torrent de Pareis, Schwimmen im Bergbach-Strand.',
@@ -434,14 +441,15 @@ const activities = [
       tips:['Früh hinfahren – Parkplatz voll ab 10 Uhr','Taschenlampe für die Tunnel = Kinder-Highlight','Kleines Schiff nach Port de Sóller buchbar','Wasser und Snacks mitbringen (wenig Infrastruktur)','Eidechsen auch hier auf den Felsen häufig'],
       images:['https://upload.wikimedia.org/wikipedia/commons/d/d4/Carretera_de_la_Calobra_msu-2018-4044.jpg','https://upload.wikimedia.org/wikipedia/commons/b/bd/Carretera_de_la_Calobra_msu-2018-4050.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8f/Sa_Calobra_Road_R01.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b3/Mallorca_%2821823700354%29.jpg','https://upload.wikimedia.org/wikipedia/commons/0/07/Baixant_el_barranc.jpeg'],
       komoot:'https://www.komoot.com/discover/sa-calobra/@39.8508,2.8049?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Aparcament+Sa+Calobra&ll=39.8531,2.8013'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.8477,2.7985&dirflg=d',
+      walkRoute:'https://maps.apple.com/?saddr=39.8477,2.7985&daddr=39.8559,2.8001&dirflg=w'
     }
   },
   {
     id:'b3', cat:'natur', emoji:'🦅', name:'Cap Formentor Leuchtturm',
     tags:['natur','drive'],
     shortDesc:'Dramatische Halbinsel, Geierperspektive, Leuchtturm am Ende der Welt.',
-    dist:'1h 50 Min.',
+    dist:'1h 45 Min.',
     detail: {
       desc:'Die Straße zum Cap Formentor gehört zu den eindrucksvollsten Mallorcas – steil, schmal, mit Aussichtspunkten über vertikale Felswände. Geier kreisen häufig. Am Ende der Halbinsel steht ein historischer Leuchtturm. Kurze Spazierwege ab Parkplatz.',
       route:'Mit dem Auto über die spektakuläre Serpentinenstraße. Erster Stopp: Mirador Es Colomer (eigener Parkplatz, 5 Min. Treppen zum Aussichtspunkt – senkrechter Blick 200 m hinab). Weiterfahrt zum Leuchtturm-Parkplatz am Cap Formentor (Endstation). Vom Parkplatz kurze Spaziergänge an die Klippen. Highlights: Mirador Es Colomer, historischer Leuchtturm Far de Formentor (1863), kreisende Geier und Falken, dramatische 400 m hohe Felswände, Café am Leuchtturm.',
@@ -450,14 +458,14 @@ const activities = [
       tips:['Mai 2026: Zufahrt teils nur per Shuttlebus ab 10 Uhr – früh starten oder vorher prüfen!','Fernglas für Geier- und Falkenbeobachtung','Kombination mit Platja de Formentor ideal','Wind am Leuchtturm: Kinder festhalten!','Mirador Es Colomer: bester Aussichtspunkt'],
       images:['https://upload.wikimedia.org/wikipedia/commons/f/fa/Badia_del_cap_de_Formentor.jpeg','https://upload.wikimedia.org/wikipedia/commons/e/e4/Far_de_Formentor_Mallorca_msu_2018-4361.jpg','https://upload.wikimedia.org/wikipedia/commons/a/a4/02001_Platja_de_Formentor.jpg','https://upload.wikimedia.org/wikipedia/commons/0/07/02017_0201_Badia_de_Pollenca%2C_Formentor.jpg'],
       komoot:'https://www.komoot.com/discover/formentor/@39.9583,3.2125?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Far+de+Formentor&ll=39.9583,3.2125'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.9613,3.2120&dirflg=d'
     }
   },
   {
     id:'b5', cat:'natur', emoji:'⛪', name:'Puig de Randa & Kloster',
     tags:['natur','hike','kids3'],
     shortDesc:'Flacher Berg mit Kloster (13. Jh.), 30 Min. Aufstieg, Panorama über ganz Mallorca.',
-    dist:'40 Min.',
+    dist:'50 Min.',
     detail: {
       desc:'Der Puig de Randa ist Mallorcas heiliger Berg mit Kloster aus dem 13. Jahrhundert. Fahrstraße bis fast oben, nur 15 Min. Fußweg. Oben Panoramablick über die gesamte Insel. Das Kloster ist bewohnt und frei zugänglich. Auf dem Weg viele Eidechsen auf den Felsmauern.',
       route:'Mit dem Auto über die kurvenreiche Bergstraße bis zum Parkplatz Santuari de Cura (548 m, fast am Gipfel). Vom Parkplatz nur 5–15 Min. Fußweg über breite Wege zum Klostereingang. Highlights: Santuari de Cura aus dem 13. Jh. (Wirkungsstätte des Mystikers Ramon Llull), 360°-Panorama bis Palma, Cabrera-Insel und Tramuntana, frei begehbare Klosterzellen und Innenhof, viele Eidechsen auf den sonnenwarmen Klostermauern, Klosterrestaurant mit günstiger Mallorca-Küche.',
@@ -466,7 +474,7 @@ const activities = [
       tips:['Mit dem Auto bis ganz oben fahren – kein Aufstieg von unten nötig!','Perfekte Kombi mit Sineu-Markt mittwochs','Klosterrestaurant: günstige Mittagsgerichte','Oben windig – Jacke einpacken','Blick bis nach Palma und zum Meer an klaren Tagen','Eidechsen auf den Klostermauern häufig'],
       images:['https://upload.wikimedia.org/wikipedia/commons/f/fc/Algaida_-_Puig_de_Randa_01_ies.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9f/Randa_Monasteries.jpg','https://upload.wikimedia.org/wikipedia/commons/2/2b/Puigderanda00.JPG','https://upload.wikimedia.org/wikipedia/commons/d/d1/Puigderanda01.JPG'],
       komoot:'https://www.komoot.com/discover/mallorca/@39.5254,2.9956?filter=tour_hike',
-      maps:'https://maps.apple.com/?q=Santuari+de+Cura+Randa&ll=39.5258,2.9211'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.5277,2.9258&dirflg=d'
     }
   },
   {
@@ -501,7 +509,7 @@ const activities = [
     id:'b8', cat:'natur', emoji:'🌄', name:'Mirador de ses Barques',
     tags:['natur','drive','half'],
     shortDesc:'Spektakulärster Aussichtspunkt über Port de Sóller, Restaurant direkt dran.',
-    dist:'1h 10 Min.',
+    dist:'1h 30 Min.',
     detail: {
       desc:'Einer der besten Aussichtspunkte der Serra de Tramuntana mit direktem Blick auf Port de Sóller. Das Restaurant am Aussichtspunkt serviert frische Gerichte mit Panoramablick. Kombination mit Valldemossa und Sóller empfehlenswert.',
       route:'Mit dem Auto über die MA-10 zwischen Sóller und Lluc bis zum Mirador-Parkplatz direkt an der Straße. Vom Parkplatz nur 30 Sekunden zum Aussichtspunkt mit Brüstung. Highlights: weiter Blick auf Port de Sóller, die Tramuntana-Bergkette und das Mittelmeer; gleichnamiges Restaurant mit Panoramaterrasse; Startpunkt für die optionale Wanderung zum Mirador de sa Pedrissa (1 Stunde extra).',
@@ -509,7 +517,7 @@ const activities = [
       duration:'1–2 Stunden', difficulty:'Leicht ★☆☆', distance:'Kurzer Spaziergang', start:'Aparcament Mirador de Ses Barques (an MA-10)',
       tips:['Morgens oder abends beste Beleuchtung', 'Kombi mit Valldemossa und Sóller sehr gut','Restaurant mittags voll – früh kommen oder reservieren','Serpentinenstraße hoch zum Kloster Lluc weiterfahren möglich'],
       images:['https://upload.wikimedia.org/wikipedia/commons/0/00/S%C3%B3ller_14.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c3/S%C3%B3ller_18.jpg','https://upload.wikimedia.org/wikipedia/commons/8/83/Pujada_a_l%27Ofre.jpg'],
-      maps:'https://maps.apple.com/?q=Mirador+de+Ses+Barques&ll=39.7913,2.7758'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.7909,2.7248&dirflg=d'
     }
   },
 
@@ -517,7 +525,7 @@ const activities = [
     id:'n1', cat:'natur', emoji:'🌿', name:'Parc Natural de Mondragó',
     tags:['natur','hike','eidechse','kids3','half'],
     shortDesc:'Geschütztes Naturparadies mit Küstenwegen, Felspools & Eidechsen – direkt ums Eck!',
-    dist:'15 Min.',
+    dist:'30 Min.',
     detail: {
       desc:'Der Parc Natural de Mondragó liegt nur 15 Minuten vom Hotel entfernt und ist ein verstecktes Paradies: zerklüftete Küstenwege, türkisfarbene Felspools und das geschützte Naturgebiet S\'Amarador. Auf den Trockensteinmauern und Felsen tummeln sich überall Podarcis lilfordi – die endemische Mauereidechse Mallorcas. Eine der schönsten Familientouren der ganzen Reise.',
       route:'Vom Parkplatz S\'Amarador startet der Rundweg (gelbe Markierung) durch lichten Pinienwald hinunter zur Cala s\'Amarador (türkises Wasser, weißer Sand). Dann entlang der Felsküste über den Mirador d\'es Roig zur Cala Mondragó (Hauptstrand mit natürlichem Felspool zwischen den Klippen). Rückweg durch das Schilfgebiet "Sa Font de N\'Alis" mit Vogelbeobachtungs-Plattform. Highlights: zwei türkise Buchten zum Baden, Felspools mit kleinen Krebsen, Eidechsen auf jeder Trockensteinmauer, Schilfgürtel mit Reihern, schattige Pinienpfade.',
@@ -526,7 +534,8 @@ const activities = [
       tips:['Parkplatz kostenlos, aber früh kommen (füllt sich rasch)','Festes Schuhwerk für Felspfade','Badeklamotten einpacken – Naturpool am Weg!','Eidechsen-Tipp: auf den Trockensteinmauern sitzen sie in der Sonne','Kombi mit Cala Mondragó-Strand danach perfekt'],
       images:['https://upload.wikimedia.org/wikipedia/commons/d/da/Cala_mondrago.jpg','https://upload.wikimedia.org/wikipedia/commons/b/ba/CalaMondrag%C3%B3.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5e/Vista_del_parque_natural_de_Mondrag%C3%B3.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8b/Parc_natural_de_Mondrag%C3%B3_Info_01.jpg'],
       komoot:'https://www.komoot.com/guide/508473/hiking-in-mondrago',
-      maps:'https://maps.apple.com/?q=Aparcament+S+Amarador+Mondrago&ll=39.3522,3.1900'
+      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.3500,3.1850&dirflg=d',
+      walkRoute:'https://maps.apple.com/?saddr=39.3500,3.1850&daddr=39.3505,3.1965&dirflg=w'
     }
   },
     // ── KULTUR ───────────────────────────────────────────────────────────────
@@ -1054,7 +1063,7 @@ function openModal(id) {
   // Parking info box
   const pb = document.getElementById('modalParkingBox');
   if (d.parking) {
-    const mapsLink = d.maps ? `<a class="parking-link" href="${d.maps}" target="_blank">📍 Parkplatz öffnen</a>` : '';
+    const mapsLink = d.maps ? `<a class="parking-link" href="${d.maps}" target="_blank">🚗 Anfahrt</a>` : '';
     pb.innerHTML = `<div class="modal-parking-box"><div class="parking-text"><strong>🅿️ PARKEN</strong>${d.parking}</div>${mapsLink}</div>`;
   } else {
     pb.innerHTML = '';
@@ -1074,8 +1083,14 @@ function openModal(id) {
   const actions = document.getElementById('modalActions');
   actions.innerHTML = '';
   if (d.booking) actions.innerHTML += `<a class="modal-btn modal-btn-booking" href="${d.booking}" target="_blank">🎟 Jetzt buchen</a>`;
-  if (d.komoot) actions.innerHTML += `<a class="modal-btn modal-btn-komoot" href="${d.komoot}" target="_blank">🗺 Komoot Route</a>`;
-  if (d.maps)   actions.innerHTML += `<a class="modal-btn modal-btn-maps"   href="${d.maps}"   target="_blank">📍 Apple Maps</a>`;
+  if (d.maps) {
+    const isWalk = d.maps.includes('dirflg=w');
+    const label = isWalk ? '🥾 Wanderroute auf Karte' : '🚗 Anfahrt ab Hotel';
+    const cls = isWalk ? 'modal-btn-walk' : 'modal-btn-maps';
+    actions.innerHTML += `<a class="modal-btn ${cls}" href="${d.maps}" target="_blank">${label}</a>`;
+  }
+  if (d.walkRoute && d.walkRoute !== d.maps) actions.innerHTML += `<a class="modal-btn modal-btn-walk" href="${d.walkRoute}" target="_blank">🥾 Wanderroute auf Karte</a>`;
+  if (d.komoot) actions.innerHTML += `<a class="modal-btn modal-btn-komoot" href="${d.komoot}" target="_blank">🗺 Komoot Tour</a>`;
 
   const sel = document.getElementById('daySelect');
   sel.innerHTML = weatherData.map(w => {
@@ -1125,27 +1140,33 @@ function openHikesOverview() {
         ${meta.length ? `<div class="hike-card-meta">${meta.map(m=>`<span>${m}</span>`).join('')}</div>` : ''}
         ${d.parking ? `<div class="hike-card-parking"><strong>🅿️ Parkplatz:</strong> ${d.parking}</div>` : ''}
         <div class="hike-card-actions">
-          ${d.maps   ? `<a class="hike-card-btn maps"   href="${d.maps}"   target="_blank">📍 Parkplatz öffnen</a>` : ''}
+          ${d.maps ? (() => {
+            const w = d.maps.includes('dirflg=w');
+            return `<a class="hike-card-btn ${w?'walk':'maps'}" href="${d.maps}" target="_blank">${w?'🥾 Wanderroute':'🚗 Anfahrt ab Hotel'}</a>`;
+          })() : ''}
+          ${d.walkRoute && d.walkRoute !== d.maps ? `<a class="hike-card-btn walk" href="${d.walkRoute}" target="_blank">🥾 Wanderroute</a>` : ''}
           ${d.komoot ? `<a class="hike-card-btn komoot" href="${d.komoot}" target="_blank">🗺 Komoot</a>` : ''}
           <button class="hike-card-btn detail" onclick="closeHikesOverview();openModal('${a.id}')">ℹ Details</button>
         </div>
       </div>`;
   }).join('');
 
-  // Multi-Stop Apple Maps URL: alle Parkplätze als Wegpunkte
+  // Multi-Stop Apple Maps URL: ab Hotel über alle Parkplätze als Wegpunkte
+  const HOTEL = '39.5394,3.3186'; // Hotel Blau Punta Reina, Cala Mandia
   const stops = hikes
     .filter(a => a.detail && a.detail.maps)
     .map(a => {
-      const m = a.detail.maps.match(/[?&]ll=([\d.\-]+,[\d.\-]+)/);
-      if (m) return m[1];
-      const q = a.detail.maps.match(/[?&]q=([^&]+)/);
-      return q ? decodeURIComponent(q[1]) : null;
+      // Extrahiere daddr-Koordinaten aus maps-URL (Format: ?saddr=...&daddr=LAT,LON&...)
+      const m = a.detail.maps.match(/[?&]daddr=([\d.\-]+,[\d.\-]+)/);
+      return m ? m[1] : null;
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    // l2 startet am Hotel selbst – auslassen
+    .filter(c => c !== HOTEL);
   const allMapBtn = document.getElementById('hikesAllMapBtn');
-  if (stops.length >= 2) {
-    const daddr = stops.slice(1).join('+to:');
-    allMapBtn.href = `https://maps.apple.com/?saddr=${encodeURIComponent(stops[0])}&daddr=${encodeURIComponent(daddr)}`;
+  if (stops.length >= 1) {
+    const daddr = stops.join('+to:');
+    allMapBtn.href = `https://maps.apple.com/?saddr=${HOTEL}&daddr=${encodeURIComponent(daddr)}&dirflg=d`;
     allMapBtn.style.display = 'inline-flex';
   } else {
     allMapBtn.style.display = 'none';
