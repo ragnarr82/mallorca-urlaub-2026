@@ -263,7 +263,7 @@
 </header>
 
 <div class="weather-bar">
-  <div class="weather-label">🌤 Wetterprognose — historische Mittelwerte Mai, Ostmallorca · Meerwasser ~21°C</div>
+  <div class="weather-label" id="weatherLabel">🌤 Wetterprognose — historische Mittelwerte Mai, Ostmallorca · Meerwasser ~21°C</div>
   <div class="weather-days" id="weatherDays"></div>
 </div>
 
@@ -368,7 +368,7 @@ const activities = [
       tips:['Mit dem Auto bis zum Parkplatz am Ortseingang – nicht ins Dorf hineinfahren!','Eidechsen sind morgens aktiver (Sonnenbaden!)', 'Kinder nicht rennen – Tiere bleiben dann sitzen','Kleines Stück Brot hinhalten: manche fressen aus der Hand','Fernglas für Detailfotos empfohlen','Danach Vintage-Tram in Sóller zum Hafen kombinierbar'],
       images:['https://upload.wikimedia.org/wikipedia/commons/3/3c/Barranc_de_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/6/67/Engstelle_im_Barranc_de_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5d/Pflasterweg_in_der_Schlucht_von_Biniaraix.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/d/de/Torrent_de_Biniaraix.jpg'],
       komoot:'https://www.komoot.com/discover/soller/@39.7696,2.7159?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.7670,2.7430&dirflg=d',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.7670,2.7430&dirflg=d',
       walkRoute:'https://maps.apple.com/?saddr=39.7670,2.7430&daddr=39.7836,2.7589&dirflg=w'
     }
   },
@@ -385,9 +385,9 @@ const activities = [
       duration:'1,5–2,5 Stunden (flexibel)', difficulty:'Leicht ★☆☆', distance:'2,5–5 km', start:'Direkt am Hotel Blau Punta Reina',
       tips:['Direkt ab Hotel – kein Auto nötig!','Kinder brauchen Schlüpfschuhe für die Felsen','Badeklamotten unbedingt einpacken (3 Buchten unterwegs)','Morgens und abends: meiste Eidechsen aktiv','In Cala Estany d\'en Mas ist die Wendekehr – gleicher Weg zurück','Strandkiosk in Cala Anguila für Eis-Pause'],
       images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/66/Podacis_lilfordi_lilfordi.jpg','https://upload.wikimedia.org/wikipedia/commons/4/44/12_Portocolom_al_capvespre.JPG'],
-      komoot:'https://www.komoot.com/discover/cala-mandia/@39.5394,3.3186?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.5520,3.3343&dirflg=w',
-      walkRoute:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.5520,3.3343&dirflg=w'
+      komoot:'https://www.komoot.com/discover/cala-mandia/@39.51785,3.31448?filter=tour_hike',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.5520,3.3343&dirflg=w',
+      walkRoute:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.5520,3.3343&dirflg=w'
     }
   },
   {
@@ -404,7 +404,7 @@ const activities = [
       tips:['Mit dem Auto ab Artà die Schotterstraße ins Naturschutzgebiet – langsam fahren!','Früh morgens: meiste Tiere aktiv', 'Fernglas mitbringen für Falken', 'Kinder ruhig halten = mehr Eidechsen sehen','Kombination mit Cala Mondragó danach ideal','Keine Verpflegung vor Ort – Picknick einpacken'],
       images:['https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/6/66/Podacis_lilfordi_lilfordi.jpg','https://upload.wikimedia.org/wikipedia/commons/7/79/Mondrag%C3%B3_in_4.JPG','https://upload.wikimedia.org/wikipedia/commons/5/56/Cala_Mondrag%C3%B3_01.jpg'],
       komoot:'https://www.komoot.com/discover/llevant/@39.656,3.400?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.7150,3.3530&dirflg=d',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.7150,3.3530&dirflg=d',
       walkRoute:'https://maps.apple.com/?saddr=39.7150,3.3530&daddr=39.7359,3.3691&dirflg=w'
     }
   },
@@ -422,7 +422,7 @@ const activities = [
       tips:['Auto am Ortsrand parken – Altstadt ist Fußgängerzone','Burg + Felsenwanderung + Coves an einem Tag kombinieren','Mittagessen im Ortskern sehr günstig','Sonnige Nachmittagsstunden: Eidechsen am aktivsten', 'Kalkstein kann rutschig sein nach Regen','Dienstags Markt in Artà als Ergänzung'],
       images:['https://upload.wikimedia.org/wikipedia/commons/7/7f/Arta_Festung_%2831907483586%29.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9e/Arta_overview.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b2/Podarcis_lilfordi_giglioli_Orchi_01.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c1/Art%C3%A0_Sant_Salvador_01.jpg'],
       komoot:'https://www.komoot.com/discover/arta/@39.6977,3.3503?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.6920,3.3490&dirflg=d',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.6920,3.3490&dirflg=d',
       walkRoute:'https://maps.apple.com/?saddr=39.6920,3.3490&daddr=39.6932,3.3508&dirflg=w'
     }
   },
@@ -441,7 +441,7 @@ const activities = [
       tips:['Früh hinfahren – Parkplatz voll ab 10 Uhr','Taschenlampe für die Tunnel = Kinder-Highlight','Kleines Schiff nach Port de Sóller buchbar','Wasser und Snacks mitbringen (wenig Infrastruktur)','Eidechsen auch hier auf den Felsen häufig'],
       images:['https://upload.wikimedia.org/wikipedia/commons/d/d4/Carretera_de_la_Calobra_msu-2018-4044.jpg','https://upload.wikimedia.org/wikipedia/commons/b/bd/Carretera_de_la_Calobra_msu-2018-4050.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8f/Sa_Calobra_Road_R01.jpg','https://upload.wikimedia.org/wikipedia/commons/b/b3/Mallorca_%2821823700354%29.jpg','https://upload.wikimedia.org/wikipedia/commons/0/07/Baixant_el_barranc.jpeg'],
       komoot:'https://www.komoot.com/discover/sa-calobra/@39.8508,2.8049?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.8477,2.7985&dirflg=d',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.8477,2.7985&dirflg=d',
       walkRoute:'https://maps.apple.com/?saddr=39.8477,2.7985&daddr=39.8559,2.8001&dirflg=w'
     }
   },
@@ -458,7 +458,7 @@ const activities = [
       tips:['Mai 2026: Zufahrt teils nur per Shuttlebus ab 10 Uhr – früh starten oder vorher prüfen!','Fernglas für Geier- und Falkenbeobachtung','Kombination mit Platja de Formentor ideal','Wind am Leuchtturm: Kinder festhalten!','Mirador Es Colomer: bester Aussichtspunkt'],
       images:['https://upload.wikimedia.org/wikipedia/commons/f/fa/Badia_del_cap_de_Formentor.jpeg','https://upload.wikimedia.org/wikipedia/commons/e/e4/Far_de_Formentor_Mallorca_msu_2018-4361.jpg','https://upload.wikimedia.org/wikipedia/commons/a/a4/02001_Platja_de_Formentor.jpg','https://upload.wikimedia.org/wikipedia/commons/0/07/02017_0201_Badia_de_Pollenca%2C_Formentor.jpg'],
       komoot:'https://www.komoot.com/discover/formentor/@39.9583,3.2125?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.9613,3.2120&dirflg=d'
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.9613,3.2120&dirflg=d'
     }
   },
   {
@@ -474,7 +474,7 @@ const activities = [
       tips:['Mit dem Auto bis ganz oben fahren – kein Aufstieg von unten nötig!','Perfekte Kombi mit Sineu-Markt mittwochs','Klosterrestaurant: günstige Mittagsgerichte','Oben windig – Jacke einpacken','Blick bis nach Palma und zum Meer an klaren Tagen','Eidechsen auf den Klostermauern häufig'],
       images:['https://upload.wikimedia.org/wikipedia/commons/f/fc/Algaida_-_Puig_de_Randa_01_ies.jpg','https://upload.wikimedia.org/wikipedia/commons/9/9f/Randa_Monasteries.jpg','https://upload.wikimedia.org/wikipedia/commons/2/2b/Puigderanda00.JPG','https://upload.wikimedia.org/wikipedia/commons/d/d1/Puigderanda01.JPG'],
       komoot:'https://www.komoot.com/discover/mallorca/@39.5254,2.9956?filter=tour_hike',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.5277,2.9258&dirflg=d'
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.5277,2.9258&dirflg=d'
     }
   },
   {
@@ -517,25 +517,25 @@ const activities = [
       duration:'1–2 Stunden', difficulty:'Leicht ★☆☆', distance:'Kurzer Spaziergang', start:'Aparcament Mirador de Ses Barques (an MA-10)',
       tips:['Morgens oder abends beste Beleuchtung', 'Kombi mit Valldemossa und Sóller sehr gut','Restaurant mittags voll – früh kommen oder reservieren','Serpentinenstraße hoch zum Kloster Lluc weiterfahren möglich'],
       images:['https://upload.wikimedia.org/wikipedia/commons/0/00/S%C3%B3ller_14.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c3/S%C3%B3ller_18.jpg','https://upload.wikimedia.org/wikipedia/commons/8/83/Pujada_a_l%27Ofre.jpg'],
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.7909,2.7248&dirflg=d'
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.7909,2.7248&dirflg=d'
     }
   },
 
   {
     id:'n1', cat:'natur', emoji:'🌿', name:'Parc Natural de Mondragó',
     tags:['natur','hike','eidechse','kids3','half'],
-    shortDesc:'Geschütztes Naturparadies mit Küstenwegen, Felspools & Eidechsen – direkt ums Eck!',
+    shortDesc:'🦩 Naturparadies mit Flamingoteich, Küstenwegen, Felspools & Eidechsen – direkt ums Eck!',
     dist:'30 Min.',
     detail: {
       desc:'Der Parc Natural de Mondragó liegt nur 15 Minuten vom Hotel entfernt und ist ein verstecktes Paradies: zerklüftete Küstenwege, türkisfarbene Felspools und das geschützte Naturgebiet S\'Amarador. Auf den Trockensteinmauern und Felsen tummeln sich überall Podarcis lilfordi – die endemische Mauereidechse Mallorcas. Eine der schönsten Familientouren der ganzen Reise.',
-      route:'Vom Parkplatz S\'Amarador startet der Rundweg (gelbe Markierung) durch lichten Pinienwald hinunter zur Cala s\'Amarador (türkises Wasser, weißer Sand). Dann entlang der Felsküste über den Mirador d\'es Roig zur Cala Mondragó (Hauptstrand mit natürlichem Felspool zwischen den Klippen). Rückweg durch das Schilfgebiet "Sa Font de N\'Alis" mit Vogelbeobachtungs-Plattform. Highlights: zwei türkise Buchten zum Baden, Felspools mit kleinen Krebsen, Eidechsen auf jeder Trockensteinmauer, Schilfgürtel mit Reihern, schattige Pinienpfade.',
+      route:'Vom Parkplatz S\'Amarador startet der Rundweg (gelbe Markierung) durch lichten Pinienwald hinunter zur Cala s\'Amarador (türkises Wasser, weißer Sand). Dann entlang der Felsküste über den Mirador d\'es Roig zur Cala Mondragó (Hauptstrand mit natürlichem Felspool zwischen den Klippen). Direkt hinter dem Strand: der Flamingoteich Ses Fonts de N\'Alís – brackige Lagune mit Beobachtungsplattform, hier rasten regelmäßig Flamingos, Reiher und Wasserschildkröten! Rückweg durch den Pinienwald. Highlights: 🦩 Flamingoteich Ses Fonts de N\'Alís mit Aussichtsplattform, zwei türkise Buchten zum Baden, Felspools mit kleinen Krebsen, Eidechsen auf jeder Trockensteinmauer, schattige Pinienpfade.',
       parking:'Aparcament S\'Amarador, Mondragó (kostenlos, ausgeschildert ab Santanyí – früh kommen, füllt sich ab 10 Uhr)',
       duration:'2–3 Stunden', difficulty:'Leicht ★☆☆', distance:'4–6 km', start:'Aparcament S\'Amarador, Parc Natural de Mondragó',
-      tips:['Parkplatz kostenlos, aber früh kommen (füllt sich rasch)','Festes Schuhwerk für Felspfade','Badeklamotten einpacken – Naturpool am Weg!','Eidechsen-Tipp: auf den Trockensteinmauern sitzen sie in der Sonne','Kombi mit Cala Mondragó-Strand danach perfekt'],
+      tips:['🦩 Fernglas mitbringen – am Flamingoteich sind oft mehrere Flamingos zu sehen!','Parkplatz kostenlos, aber früh kommen (füllt sich rasch)','Festes Schuhwerk für Felspfade','Badeklamotten einpacken – Naturpool am Weg!','Eidechsen-Tipp: auf den Trockensteinmauern sitzen sie in der Sonne','Kombi mit Cala Mondragó-Strand danach perfekt'],
       images:['https://upload.wikimedia.org/wikipedia/commons/d/da/Cala_mondrago.jpg','https://upload.wikimedia.org/wikipedia/commons/b/ba/CalaMondrag%C3%B3.jpg','https://upload.wikimedia.org/wikipedia/commons/5/5e/Vista_del_parque_natural_de_Mondrag%C3%B3.jpg','https://upload.wikimedia.org/wikipedia/commons/8/8b/Parc_natural_de_Mondrag%C3%B3_Info_01.jpg'],
       komoot:'https://www.komoot.com/guide/508473/hiking-in-mondrago',
-      maps:'https://maps.apple.com/?saddr=39.5394,3.3186&daddr=39.3500,3.1850&dirflg=d',
-      walkRoute:'https://maps.apple.com/?saddr=39.3500,3.1850&daddr=39.3505,3.1965&dirflg=w'
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.3500,3.1850&dirflg=d',
+      walkRoute:'https://maps.apple.com/?saddr=39.3500,3.1850&daddr=39.35130,3.18900&dirflg=w'
     }
   },
     // ── KULTUR ───────────────────────────────────────────────────────────────
@@ -835,6 +835,65 @@ function renderWeather() {
       <div class="wd-rain">💧 ${d.rain}%</div>
       <div class="wd-desc">${d.desc}</div>
     </div>`).join('');
+}
+
+// ── LIVE WEATHER (Open-Meteo, kostenlos, ohne Key) ───────────────────────────
+async function loadLiveWeather() {
+  // Hotel Blau Punta Reina, Cala Mandia
+  const lat = 39.51785, lon = 3.31448;
+  // Open-Meteo liefert max. 16 Tage. Wir fragen nur den verfügbaren Bereich ab,
+  // beschränkt auf Reisezeitraum 18.–27.05.2026
+  const TRIP_START = new Date('2026-05-18');
+  const TRIP_END   = new Date('2026-05-27');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const horizonEnd = new Date(today); horizonEnd.setDate(today.getDate() + 16);
+  const start = new Date(Math.max(today, TRIP_START));
+  const end   = new Date(Math.min(horizonEnd, TRIP_END));
+  if (start > end) return; // Reise zu weit in der Zukunft – nur historische Werte
+  const fmt = d => d.toISOString().slice(0,10);
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+              `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+              `&timezone=Europe%2FBerlin&start_date=${fmt(start)}&end_date=${fmt(end)}`;
+  const codeMap = {
+    0:['☀️','Sonnig'], 1:['🌤','Heiter'], 2:['⛅','Wolkig'], 3:['☁️','Bedeckt'],
+    45:['🌫','Nebel'], 48:['🌫','Nebel'],
+    51:['🌦','Nieselregen'], 53:['🌦','Nieselregen'], 55:['🌦','Nieselregen'],
+    61:['🌧','Regen'], 63:['🌧','Regen'], 65:['🌧','Starkregen'],
+    71:['🌨','Schnee'], 73:['🌨','Schnee'], 75:['🌨','Schnee'],
+    80:['🌦','Schauer'], 81:['🌦','Schauer'], 82:['🌧','Starke Schauer'],
+    95:['⛈','Gewitter'], 96:['⛈','Gewitter'], 99:['⛈','Gewitter']
+  };
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('API ' + res.status);
+    const data = await res.json();
+    if (!data.daily || !data.daily.time) throw new Error('no daily data');
+    let updated = 0;
+    data.daily.time.forEach((iso, i) => {
+      const date = iso.slice(8,10) + '.' + iso.slice(5,7);
+      const wd = weatherData.find(w => w.date === date);
+      if (!wd) return;
+      const [icon, desc] = codeMap[data.daily.weather_code[i]] || ['🌤','—'];
+      wd.icon = icon;
+      wd.high = Math.round(data.daily.temperature_2m_max[i]);
+      wd.low  = Math.round(data.daily.temperature_2m_min[i]);
+      wd.rain = data.daily.precipitation_probability_max[i] ?? 0;
+      wd.desc = desc;
+      updated++;
+    });
+    if (updated) {
+      renderWeather();
+      const todayStr = new Date().toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});
+      const remaining = 10 - updated;
+      const note = remaining > 0
+        ? ` · ${updated}/10 Tagen live · ${remaining} Tage noch außer Reichweite (historische Werte)`
+        : ` · alle 10 Tage live!`;
+      document.getElementById('weatherLabel').innerHTML =
+        `🛰 <strong>Live-Vorhersage</strong> · Open-Meteo · Cala Mandia · Stand: ${todayStr}${note}`;
+    }
+  } catch (e) {
+    console.warn('Live-Wetter fehlgeschlagen, nutze historische Werte:', e.message);
+  }
 }
 
 // ── POOL ─────────────────────────────────────────────────────────────────────
@@ -1152,7 +1211,7 @@ function openHikesOverview() {
   }).join('');
 
   // Multi-Stop Apple Maps URL: ab Hotel über alle Parkplätze als Wegpunkte
-  const HOTEL = '39.5394,3.3186'; // Hotel Blau Punta Reina, Cala Mandia
+  const HOTEL = '39.51785,3.31448'; // Hotel Blau Punta Reina, Cala Mandia
   const stops = hikes
     .filter(a => a.detail && a.detail.maps)
     .map(a => {
@@ -1197,6 +1256,7 @@ function showToast(msg) {
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 renderWeather(); renderPool(); renderDays();
+loadLiveWeather(); // versucht Live-Daten zu laden, fällt sonst auf historische Werte zurück
 </script>
 </body>
 </html>
