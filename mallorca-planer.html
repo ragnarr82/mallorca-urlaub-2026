@@ -30,6 +30,8 @@
   .btn-clear:hover { background: rgba(255,255,255,0.25); }
   .btn-hikes { background: var(--green); color: white; }
   .btn-hikes:hover { background: #225d44; }
+  .btn-info { background: #4338ca; color: white; }
+  .btn-info:hover { background: #3730a3; }
 
   /* WEATHER */
   .weather-bar { background: white; border-bottom: 1px solid #e5e7eb; padding: 8px 20px; overflow-x: auto; white-space: nowrap; }
@@ -207,6 +209,29 @@
   .modal-day-selector select:focus { border-color: var(--sea); }
   .modal-day-btns { display: flex; gap: 7px; margin-top: 7px; }
 
+  /* INFO MODAL */
+  .info-modal { max-width: 680px; }
+  .info-header { padding: 18px 20px 14px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #e5e7eb; }
+  .info-title { font-size: 1.25rem; font-weight: 700; color: #1a1a2e; }
+  .info-sub { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
+  .info-body { padding: 14px 20px 22px; }
+  .info-section { margin-bottom: 18px; padding: 13px 15px; border-radius: 10px; }
+  .info-section h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
+  .info-section ul { list-style: none; padding-left: 0; }
+  .info-section li { font-size: 0.8rem; color: #374151; line-height: 1.55; padding: 3px 0 3px 18px; position: relative; }
+  .info-section li::before { content: '·'; position: absolute; left: 5px; font-weight: 700; }
+  .info-section li strong { color: #1a1a2e; }
+  .info-emergency { background: #fef2f2; border-left: 4px solid #dc2626; }
+  .info-emergency h3 { color: #dc2626; }
+  .info-parking { background: #fef3c7; border-left: 4px solid #d97706; }
+  .info-parking h3 { color: #b45309; }
+  .info-driving { background: #eff6ff; border-left: 4px solid #2563eb; }
+  .info-driving h3 { color: #1e40af; }
+  .info-fiestas { background: #fdf4ff; border-left: 4px solid #a855f7; }
+  .info-fiestas h3 { color: #7c3aed; }
+  .info-kids { background: #ecfdf5; border-left: 4px solid var(--green); }
+  .info-kids h3 { color: var(--green); }
+
   /* HIKES OVERVIEW */
   .hikes-modal { max-width: 760px; }
   .hikes-header { padding: 18px 20px 10px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #e5e7eb; }
@@ -256,6 +281,7 @@
     <p>18.–27. Mai · Hotel Blau Punta Reina · Frau + 2 Kinder (3 & 6 J.) · Opel Mokka</p>
   </div>
   <div class="header-actions">
+    <button class="btn btn-info" onclick="openInfoModal()">ℹ️ Praktisches</button>
     <button class="btn btn-hikes" onclick="openHikesOverview()">🥾 Wanderrouten-Übersicht</button>
     <button class="btn btn-suggest" onclick="loadSuggestedPlan()">✨ Vorschlag laden</button>
     <button class="btn btn-clear" onclick="clearAll()">🗑 Leeren</button>
@@ -311,6 +337,71 @@
           <button class="modal-btn modal-btn-add"       style="flex:1" onclick="addFromModal()">+ Zum Plan hinzufügen</button>
           <button class="modal-btn modal-btn-secondary"              onclick="closeModal()">Schließen</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRAKTISCHES INFO MODAL -->
+<div class="modal-backdrop" id="infoBackdrop" onclick="if(event.target===this)closeInfoModal()">
+  <div class="modal info-modal">
+    <div class="info-header">
+      <div>
+        <div class="info-title">ℹ️ Praktische Infos Mallorca</div>
+        <div class="info-sub">Notruf · Verkehr · Mietwagen · Mai-Termine</div>
+      </div>
+      <button class="modal-close" onclick="closeInfoModal()">✕</button>
+    </div>
+    <div class="info-body">
+      <div class="info-section info-emergency">
+        <h3>🚨 Notrufnummern</h3>
+        <ul>
+          <li><strong>112</strong> – Allgemeiner Notruf (Polizei, Feuerwehr, Rettung) – funktioniert ohne Karte</li>
+          <li><strong>061</strong> – Rettungsdienst direkt</li>
+          <li><strong>Hospital Manacor</strong> (nächstes Krankenhaus) – Carretera Manacor-Alcúdia s/n, ca. 20 Min vom Hotel</li>
+          <li><strong>Apotheken</strong> – grünes Kreuz; im Hochsommer in Touristenorten häufig 24h-Dienst rotierend</li>
+        </ul>
+      </div>
+      <div class="info-section info-parking">
+        <h3>🅿️ Parken – Farbcodes wichtig!</h3>
+        <ul>
+          <li><strong>Weiß</strong> – kostenlos parken</li>
+          <li><strong>Blau</strong> – gebührenpflichtig, Ticket am Automaten (meist 1–2 Std)</li>
+          <li><strong>Gelb</strong> – ABSOLUTES Halteverbot! → Abschleppen & Parkkralle sehr häufig</li>
+          <li><strong>Schild "1–15"</strong>: in dieser Monatshälfte verboten · <strong>"16–31"</strong>: in der zweiten Hälfte verboten</li>
+          <li>💡 <strong>Strafzettel-Trick:</strong> 50% Rabatt wenn innerhalb 24h direkt bei Polizei gezahlt!</li>
+        </ul>
+      </div>
+      <div class="info-section info-driving">
+        <h3>🚗 Mietwagen & Bergstraßen</h3>
+        <ul>
+          <li><strong>0,5 ‰ Promillegrenze</strong> – strikte Kontrollen während Fiestas</li>
+          <li><strong>Bergstraßen (z.B. Sa Calobra, Formentor):</strong> Hupen vor unübersichtlichen Kurven, bei Anhalten linken Blinker / Hand rausstrecken</li>
+          <li>Tankstellen-Tipp: in der Stadt günstiger als an touristischen Achsen</li>
+          <li><strong>Cap Formentor:</strong> Mai 2026 evtl. nur per Shuttle ab 10 Uhr – früh fahren!</li>
+          <li>Sa Calobra: Parkplatz ab 10 Uhr voll – vor 9 Uhr losfahren</li>
+        </ul>
+      </div>
+      <div class="info-section info-fiestas">
+        <h3>🎉 Termine im Mai 2026</h3>
+        <ul>
+          <li><strong>Mi., 20.05. Sineu</strong> – wöchentlicher Markt 8–13 Uhr (größter der Region)</li>
+          <li><strong>Mi., Santanyí</strong> – Wochenmarkt vormittags</li>
+          <li><strong>Mi., Manacor</strong> – Wochenmarkt (sehr groß)</li>
+          <li><strong>So., Felanitx</strong> – Wochenmarkt ab 9 Uhr</li>
+          <li><strong>16.–17.05. Capdepera (knapp vor Anreise)</strong> – Mittelaltermarkt auf der Burg, evtl. Verlängerung prüfen!</li>
+          <li><strong>11.05. Sóller</strong> – Moros i Cristians (Piratenschlacht-Reenactment) – vor Anreise</li>
+        </ul>
+      </div>
+      <div class="info-section info-kids">
+        <h3>👶 Tipps mit Kleinkindern</h3>
+        <ul>
+          <li>Sonnenschutz: Mallorca-Mai-Sonne unterschätzt – Hüte für die Kinder!</li>
+          <li>Restaurants öffnen abends erst ab 19:30/20 – Kinder vorher mit Snack</li>
+          <li>Quallen: meist erst ab Juni – im Mai noch entspannt</li>
+          <li>Stechmücken: Mai schon aktiv, abends Schutz</li>
+          <li>Hotelpool oft heilsame Mittagspause statt Strand-Hitze</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -538,6 +629,33 @@ const activities = [
       walkRoute:'https://maps.apple.com/?saddr=39.3500,3.1850&daddr=39.35130,3.18900&dirflg=w'
     }
   },
+  {
+    id:'b9', cat:'natur', emoji:'🪨', name:'Coves dels Hams – Höhlen',
+    tags:['natur','kids3','half'],
+    shortDesc:'Alternative zu den Drachenhöhlen: weniger Andrang, Bootskonzert + Jules-Verne-Show.',
+    dist:'15 Min.',
+    detail: {
+      desc:'Die "Hams"-Höhlen sind 350m unter der Erde und beherbergen einen Salzwassersee mit Gezeiten. Speerartige Stalaktiten, Bootskonzert auf dem unterirdischen See und eine Jules-Verne-Multimedia-Show. Direkt neben den Drachenhöhlen, aber meist weniger besucht – perfekter Plan B!',
+      duration:'1 Stunde geführte Tour', difficulty:'Leicht ★☆☆', distance:'350 m', start:'Crta. Manacor–Porto Cristo Km 11,5',
+      tips:['Bei Andrang am Drac → einfach hier hin!','In der Höhle ~18°C – Pullover','Jules-Verne-Show begeistert die Kinder','Online-Ticket spart Wartezeit','Direkt 5 km vom Hotel – kurzer Ausflug'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/8/8d/15_Portocolom_al_capvespre.JPG'],
+      booking:'https://www.cuevasdelshams.com/',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.5449,3.3201&dirflg=d'
+    }
+  },
+  {
+    id:'b10', cat:'natur', emoji:'🌵', name:'Botanicactus – Riesen-Kakteengarten',
+    tags:['natur','kids3','half'],
+    shortDesc:'15 Hektar Kaktuswelt mit Wasserrad, Fischteich, Palmenhain – Eldorado für Kinder!',
+    dist:'45 Min.',
+    detail: {
+      desc:'Einer der größten Kakteengärten Europas: 15 Hektar mit Tausenden Kakteenarten aus aller Welt. Dazu Palmenhain, altes Wasserrad, Fischteich – ein magischer Ort für Kinder zum Entdecken. Auf dem Weg zwischen Ses Salines und Santanyí.',
+      duration:'1,5–2 Stunden', difficulty:'Flach', distance:'2 km Wege', start:'Crta. Ses Salines–Santanyí Km 1',
+      tips:['Sonnenschutz mitbringen (wenig Schatten)','Vormittags wegen Hitze','Kombi mit Es Trenc-Strand danach perfekt','Apr–Aug 9–19:30 Uhr geöffnet','Eintritt günstig'],
+      images:[],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.3416,3.0652&dirflg=d'
+    }
+  },
     // ── KULTUR ───────────────────────────────────────────────────────────────
   {
     id:'c1', cat:'kultur', emoji:'🏛️', name:'Palma – Altstadt & Kathedrale',
@@ -616,6 +734,32 @@ const activities = [
       tips:['Sonntags Wochenmarkt ab 9 Uhr','Töpferei und lokale Produkte kaufen','Günstige Celler-Restaurants','Weinregion – Bodega Miquel Oliver einen Kilometer außerhalb'],
       images:['https://upload.wikimedia.org/wikipedia/commons/6/60/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio_%283%29.jpg','https://upload.wikimedia.org/wikipedia/commons/b/ba/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio_%284%29.jpg','https://upload.wikimedia.org/wikipedia/commons/a/ad/07200_Felanitx%2C_Illes_Balears%2C_Spain_-_panoramio.jpg'],
       maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.4643,3.1431&dirflg=d'
+    }
+  },
+  {
+    id:'c7', cat:'kultur', emoji:'🏰', name:'Castell de Capdepera – Bergfestung',
+    tags:['kultur','kids3','half','top'],
+    shortDesc:'Mittelalterliche Festung mit Panoramablick + 3. Mai-Wochenende Mittelaltermarkt!',
+    dist:'40 Min.',
+    detail: {
+      desc:'Eine der besterhaltenen mittelalterlichen Festungen Mallorcas. Auf einem Hügel über Capdepera mit Blick bis zur Küste und nach Menorca. Begehbare Wehrmauern, kleine Kapelle, Türme erklimmbar. Kinder lieben Burgen! Höhepunkt: 3. Mai-Wochenende (~16.–17.05.2026) findet hier ein großer Mittelaltermarkt auf der Burg statt.',
+      duration:'1,5–2 Stunden', difficulty:'Leicht (Aufstieg)', distance:'Burgrundgang', start:'Capdepera Ortskern',
+      tips:['🎪 Mittelaltermarkt 3. Mai-Wo (genauen Termin checken!)','Mai geöffnet 10–20 Uhr','Eintritt günstig (~3€)','Kombi mit Cala Agulla oder Cala Mezquida danach','Schatten knapp – Sonnenhut für Kinder!','Parken am Fuß des Hügels'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/8/8a/Castell_de_Capdepera.jpg','https://upload.wikimedia.org/wikipedia/commons/7/77/Castell_de_Capdepera_05.jpg'],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.7044,3.4330&dirflg=d'
+    }
+  },
+  {
+    id:'c8', cat:'kultur', emoji:'🗿', name:'Ses Païsses – Talaiot-Siedlung',
+    tags:['kultur','kids3','half'],
+    shortDesc:'3000 Jahre alte Bronze-Zeit-Ruinen mit Ringmauer bei Artà – Abenteuer für 6-Jährige!',
+    dist:'30 Min.',
+    detail: {
+      desc:'Eine der besterhaltenen prähistorischen Siedlungen der Balearen. Mächtige Ringmauer aus der Bronzezeit (ca. 1300 v. Chr.), begehbare Talaiote (Steintürme), Steinhütten. Weniger touristisch als andere Stätten, "abenteuerliche" Atmosphäre für Kinder. Direkt vor den Toren Artàs.',
+      duration:'45 Min.–1 Stunde', difficulty:'Flach', distance:'500 m', start:'Cami de Sa Corbaia, Artà',
+      tips:['Apr–Okt Mo–Sa 10–13 und 14:30–18:30','Kombi mit Artà-Burg oder Coves d\'Artà','Wenig Schatten – Sonnenhut','Kinder lieben das Erkunden der Steinhütten','Anfahrt: kurz vor Artà rechts ab'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/e/ed/Ses_Pa%C3%AFsses_06.jpg','https://upload.wikimedia.org/wikipedia/commons/d/d2/Ses_Pa%C3%AFsses_01.jpg'],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.6871,3.3536&dirflg=d'
     }
   },
 
@@ -711,6 +855,45 @@ const activities = [
       maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.4260,3.2647&dirflg=d'
     }
   },
+  {
+    id:'a8', cat:'beach', emoji:'🏖️', name:'Cala Mendia – Nachbarbucht',
+    tags:['beach','kids3','half','top'],
+    shortDesc:'★ Nachbarbucht des Hotels – seicht, ideal für Kleinkinder, Fischrestaurant am Strand.',
+    dist:'5 Min.',
+    detail: {
+      desc:'Die Nachbarbucht direkt nördlich des Hotels. Kleiner Sandstrand mit sehr seichtem, ruhigem Wasser – perfekt für die 3-Jährige. Felswände rundherum schützen vor Wellen. Beliebtes Fischrestaurant direkt am Strand. Zu Fuß vom Hotel über den Küstenpfad in ~15 Min. erreichbar oder per Auto in 5 Min.',
+      duration:'Halbtag', difficulty:'Flach', distance:'200 m Strand', start:'Cala Mendia (Manacor)',
+      tips:['Zu Fuß über Küstenpfad ab Hotel – kein Auto nötig!','Sehr seicht: ideal für 3-Jährige','Schwimmflügel reichen – kaum Wellen','Restaurant am Strand für Mittag','Mit Cala Anguila und Cala Estany d\'en Mas kombinierbar'],
+      images:[],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.5204,3.3136&dirflg=w'
+    }
+  },
+  {
+    id:'a9', cat:'beach', emoji:'🏖️', name:'Cala Domingos Gran',
+    tags:['beach','kids3','half'],
+    shortDesc:'Familienstrand 10 Min südlich – seicht abfallend, gute Infrastruktur, Liegen + Schirme.',
+    dist:'10 Min.',
+    detail: {
+      desc:'Cala Domingos Gran (Cales de Mallorca) ist ein idealer Familienstrand: sanft abfallender Sand, klares ruhiges Wasser, gute Infrastruktur mit Restaurants, Liegestühlen und Sonnenschirmen. Sehr beliebt aber meist genug Platz. Schnell vom Hotel zu erreichen.',
+      duration:'Halbtag', difficulty:'Flach', distance:'300 m Strand', start:'Cales de Mallorca',
+      tips:['Liegen + Schirme vor Ort mietbar','Strandrestaurant für Snacks','Kleiner Felspfad zu Nachbarbuchten','Schwimmflügel reichen – sanfter Einstieg','Parkmöglichkeiten kostenlos'],
+      images:[],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.4569,3.2793&dirflg=d'
+    }
+  },
+  {
+    id:'a10', cat:'beach', emoji:'🏖️', name:'Cala Agulla – Pinien-Strand',
+    tags:['beach','kids3','full'],
+    shortDesc:'600m Pinien-gesäumter Sandstrand bei Cala Rajada – Wasser sehr seicht.',
+    dist:'45 Min.',
+    detail: {
+      desc:'Einer der schönsten Strände im Nordosten: 600m feiner Sand, gesäumt von Pinienwald, der für Schatten sorgt. Das Wasser wird nur sehr langsam tiefer – ideal für Familien. Tretboot-Verleih, Strandbar, Naturschutzgebiet im Hinterland. Kombinierbar mit Castell de Capdepera oder Cala Mezquida.',
+      duration:'Ganztag', difficulty:'Flach', distance:'600 m Strand', start:'Cala Rajada',
+      tips:['Pinienwald hinten = natürlicher Schatten','Tretboote für Familie ausleihen','Sehr seicht: perfekt für 3-Jährige','Kombi mit Capdepera-Burg morgens','Frühe Anreise = besserer Parkplatz'],
+      images:['https://upload.wikimedia.org/wikipedia/commons/3/34/Cala_Agulla_Mallorca.jpg'],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.7179,3.4595&dirflg=d'
+    }
+  },
 
   // ── SPASS ─────────────────────────────────────────────────────────────────
   {
@@ -752,6 +935,33 @@ const activities = [
       tips:['Verleih am Hafen Portocolom ~10€/Tag','Morgens fahren (vor Hitze)','Pause am Hafen für Eiscreme','E-Bikes mit Kinderanhänger verfügbar'],
       images:['https://upload.wikimedia.org/wikipedia/commons/2/22/08_Portocolom_al_capvespre.JPG','https://upload.wikimedia.org/wikipedia/commons/4/44/12_Portocolom_al_capvespre.JPG'],
       maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.4260,3.2647&dirflg=d'
+    }
+  },
+  {
+    id:'d4', cat:'spass', emoji:'🦒', name:'Safari-Zoo Sa Coma',
+    tags:['spass','kids3','full','top'],
+    shortDesc:'★ Drive-through Afrika-Park: Giraffen, Zebras, Strauße – direkt vom Auto aus!',
+    dist:'30 Min.',
+    detail: {
+      desc:'Die "Reserva Africana" Sa Coma ist eine der besten Familien-Attraktionen Mallorcas: durch ein großes Areal fährt man mit dem eigenen Auto und sieht Giraffen, Zebras, Antilopen, Strauße aus nächster Nähe – die Tiere kommen sogar ans Auto! Anschließend Streichelzoo, Spielplatz und eine kleine Bimmelbahn. Kinder werden begeistert sein!',
+      duration:'2–3 Stunden', difficulty:'Drive-through', distance:'5 km im Park', start:'Sa Coma, Ctra. Porto Cristo–Son Servera Km 5',
+      tips:['🦒 Fütterung nur mit Park-Futter erlaubt','Im Auto bleiben! (Sicherheit)','Strauße picken am Lenkrad – Fenster halb runter','Alternative Bimmelbahn-Tour für Nicht-Autofahrer','Täglich 9–18:30 Uhr','Direkt mit Sa Coma-Strand kombinierbar'],
+      images:[],
+      booking:'https://www.safarizoo.es/',
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.6082,3.3782&dirflg=d'
+    }
+  },
+  {
+    id:'d5', cat:'spass', emoji:'🌴', name:'Jumaica Tropical Park',
+    tags:['spass','kids3','half'],
+    shortDesc:'Tropischer Garten + Mini-Zoo: Bananen-Plantage, exotische Tiere – perfekt für die Kleinen.',
+    dist:'25 Min.',
+    detail: {
+      desc:'Versteckter Geheimtipp zwischen Portocolom und Cala Murada: üppiger tropischer Garten mit Bananenplantage, Bambushain und kleinem Zoo mit exotischen und einheimischen Tieren. Kinderfreundlich, überschaubare Größe – ideal für einen entspannten Halbtag, besonders mit der 3-Jährigen.',
+      duration:'1,5–2 Stunden', difficulty:'Flach', distance:'2 km Wege', start:'Ctra. Porto Colom–Porto Cristo Km 4,5',
+      tips:['Direkter Weg vom Hotel: ~25 Min','Sommer geöffnet 9–18 Uhr','Schattige Wege im tropischen Garten','Kombi mit Strand-Nachmittag','Picknick-Areale vorhanden'],
+      images:[],
+      maps:'https://maps.apple.com/?saddr=39.51785,3.31448&daddr=39.4750,3.2750&dirflg=d'
     }
   },
 
@@ -1234,8 +1444,12 @@ function openHikesOverview() {
   document.getElementById('hikesBackdrop').classList.add('open');
 }
 function closeHikesOverview() { document.getElementById('hikesBackdrop').classList.remove('open'); }
+
+// ── INFO MODAL ────────────────────────────────────────────────────────────────
+function openInfoModal() { document.getElementById('infoBackdrop').classList.add('open'); }
+function closeInfoModal() { document.getElementById('infoBackdrop').classList.remove('open'); }
 function handleBackdropClick(e) { if (e.target===document.getElementById('modalBackdrop')) closeModal(); }
-document.addEventListener('keydown', e => { if (e.key==='Escape') { closeModal(); closeHikesOverview(); } });
+document.addEventListener('keydown', e => { if (e.key==='Escape') { closeModal(); closeHikesOverview(); closeInfoModal(); } });
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────────
 function loadSuggestedPlan() {
